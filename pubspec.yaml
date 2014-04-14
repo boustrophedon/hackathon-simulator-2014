@@ -1,0 +1,11 @@
+name: hack_sim_2014
+version: "0.1.0"
+description: hackathon simulator 2014
+author: Harry Stern <harry.stern@rutgers.edu>
+homepage: https://github.com/boustrophedon/hackathon_simulator_2014
+environment:
+  sdk: ">=1.2.0"
+dependencies:
+  browser:
+  entity_component:
+    git: git://github.com/boustrophedon/entity-component-dart.git

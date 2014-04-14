@@ -1,0 +1,38 @@
+body {
+  background-color: #F8F8F8;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.2em;
+  margin: 15px;
+  text-align: center;
+}
+
+p {
+  color: #333;
+}
+
+#container {
+  width: 500px;
+  height: 800px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#summary {
+  float: left;
+}
+
+#notes {
+  float: right;
+  width: 120px;
+  text-align: right;
+}
+
+.error {
+  font-style: italic;
+  color: red;
+}
+
