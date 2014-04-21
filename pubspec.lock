@@ -4,11 +4,11 @@ packages:
   browser:
     description: browser
     source: hosted
-    version: "0.10.0+1"
+    version: "0.10.0+2"
   entity_component:
     description:
       ref: null
-      resolved-ref: "6d16b42382a07b1f361f50c307f26838affaaea1"
+      resolved-ref: "6d6d524ab4aa6bfd6357ab1bd298ef03b13fe5aa"
       url: "git://github.com/boustrophedon/entity-component-dart.git"
     source: git
     version: "0.1.0"

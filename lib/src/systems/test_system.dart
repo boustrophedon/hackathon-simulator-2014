@@ -1,8 +1,7 @@
 part of hacksim;
 
 class TestSystem extends System {
-  TestSystem(World world) {
-    this.world = world;
+  TestSystem(World world) : super(world) {
     components_wanted = new Set.from([Position,]);
 
     Position pos = new Position(1,2);
