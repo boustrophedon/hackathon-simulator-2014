@@ -11,7 +11,7 @@ class TestSystem extends System {
 
     world.subscribe_event('TestEvent', test_callback);
     world.subscribe_event('TestEvent2', test_callback);
-    world.send_event('TestEvent2', {'test_attr': 'maaaaaaaaaaaaaaa'});
+    world.send_event('TestEvent2', {'test_attr': 'aoeu'});
   }
 
   void test_callback(Map event) {
@@ -20,7 +20,5 @@ class TestSystem extends System {
   }
 
   void process_entity(Entity entity) {
-    world.send_event('TestEvent', {'test_attr': 'this is a test'});
-    world.send_event('TestEvent2', {'test_attr': 'this is a test'});
   }
 }
