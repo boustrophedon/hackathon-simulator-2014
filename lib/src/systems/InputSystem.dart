@@ -13,18 +13,18 @@ class InputSystem extends System {
   }
 
   void register_keydown(KeyEvent e) {
-    //world.send_event('KeyDown', {'KeyEvent':e});
-    print("KeyDown ${e.keyCode} ${e.charCode} ${e.which}");
+    world.send_event('KeyDown', {'KeyEvent':e});
   }
   void register_keyup(KeyEvent e) {
-    //world.send_event('KeyUp', {'KeyEvent':e});
-    print("KeyUp ${e.keyCode} ${e.charCode} ${e.which}");
+    world.send_event('KeyUp', {'KeyEvent':e});
   }
 
-  void handle_keydown(KeyEvent e) {
+  void handle_keydown(Map event) {
+    KeyEvent e = event['KeyEvent'];
     print("KeyDown ${e.keyCode} ${e.charCode}");
   }
-  void handle_keyup(KeyEvent e) {
+  void handle_keyup(Map event) {
+    KeyEvent e = event['KeyEvent'];
     print("KeyUp ${e.keyCode} ${e.charCode}");
   }
 
