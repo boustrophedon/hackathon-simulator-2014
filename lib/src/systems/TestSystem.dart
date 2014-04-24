@@ -3,7 +3,8 @@ part of hacksim;
 class TestSystem extends System {
   TestSystem(World world) : super(world) {
     components_wanted = new Set.from([Position,]);
-
+  }
+  void initialize() {
     Position pos = new Position(1,2);
     Entity e = world.new_entity();
     e.add_component(pos);
