@@ -38,21 +38,32 @@ class InputSystem extends System {
   // They shouldn't change, since they just push input events onto the event queue. it's a bit pointless but it means that all input
   // from the same frame gets dealt with in the same loop rather than getting handled immediately
   void register_mousedown(MouseEvent e) {
-    world.send_event('MouseDown', {'MouseEvent':e});
+    int x = e.client.x-canvas.offsetLeft; int y = e.client.y-canvas.offsetTop;
+    world.send_event('MouseDown', {'MouseEvent':e,'x':x,'y':y});
   }
   void register_mousemove(MouseEvent e) {
-    world.send_event('MouseMove', {'MouseEvent':e});
+    int x = e.client.x-canvas.offsetLeft; int y = e.client.y-canvas.offsetTop;
+    world.send_event('MouseMove', {'MouseEvent':e,'x':x,'y':y});
   }
   void register_mouseup(MouseEvent e) {
-    world.send_event('MouseUp', {'MouseEvent':e});
+    int x = e.client.x-canvas.offsetLeft; int y = e.client.y-canvas.offsetTop;
+    world.send_event('MouseUp', {'MouseEvent':e,'x':x,'y':y});
   }
   void register_touchstart(TouchEvent e) {
     e.preventDefault();
-    world.send_event('TouchStart', {'TouchEvent':e});
+    if (e.touches.length > 0) {
+      Touch t = e.touches.first;
+      int x = t.client.x-canvas.offsetLeft; int y = t.client.y-canvas.offsetTop;
+      world.send_event('TouchStart', {'TouchEvent':e,'x':x,'y':y});
+    }
   }
   void register_touchmove(TouchEvent e) {
     e.preventDefault();
-    world.send_event('TouchMove', {'TouchEvent':e});
+    if (e.touches.length > 0) {
+      Touch t = e.touches.first;
+      int x = t.client.x-canvas.offsetLeft; int y = t.client.y-canvas.offsetTop;
+      world.send_event('TouchMove', {'TouchEvent':e,'x':x,'y':y});
+    }
   }
   void register_touchend(TouchEvent e) {
     e.preventDefault();
@@ -79,29 +90,18 @@ class InputSystem extends System {
   // I think/it seems you can add window.scrollX and window.scrollY if you care
   void handle_mousedown(Map event) {
     MouseEvent e = event['MouseEvent'];
-    int x = e.client.x-canvas.offsetLeft; int y = e.client.y-canvas.offsetTop;
   }
   void handle_mousemove(Map event) {
     MouseEvent e = event['MouseEvent'];
-    int x = e.client.x-canvas.offsetLeft; int y = e.client.y-canvas.offsetTop;
   }
   void handle_mouseup(Map event) {
     MouseEvent e = event['MouseEvent'];
-    int x = e.client.x-canvas.offsetLeft; int y = e.client.y-canvas.offsetTop;
   }
   void handle_touchstart(Map event) {
     TouchEvent e = event['TouchEvent'];
-    if (e.touches.length > 0) {
-      Touch t = event['TouchEvent'].touches.first;
-      int x = t.client.x-canvas.offsetLeft; int y = t.client.y-canvas.offsetTop;
-    }
   }
   void handle_touchmove(Map event) {
     TouchEvent e = event['TouchEvent'];
-    if (e.touches.length > 0) {
-      Touch t = event['TouchEvent'].touches.first;
-      int x = t.client.x-canvas.offsetLeft; int y = t.client.y-canvas.offsetTop;
-    }
   }
   void handle_touchend(Map event) {
     TouchEvent e = event['TouchEvent'];

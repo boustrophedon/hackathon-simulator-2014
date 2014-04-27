@@ -10,3 +10,7 @@ class Kind implements Component {
   String kind;
   Kind(this.kind);
 }
+
+class Picking implements Component { 
+  Picking();
+}
