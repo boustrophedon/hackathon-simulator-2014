@@ -17,16 +17,20 @@ class InputSystem extends System {
     // in the parameters. it is not necessary though; I think I can just use Event or UIEvent.
     // also, need to actually add the mousemove/touchmove handlers
     canvas.onMouseDown.listen(register_mousedown);
+    canvas.onMouseMove.listen(register_mousemove);
     window.onMouseUp.listen(register_mouseup);
     canvas.onTouchStart.listen(register_touchstart);
+    canvas.onTouchMove.listen(register_touchmove);
     window.onTouchEnd.listen(register_touchend);
 
     world.subscribe_event('KeyDown', handle_keydown);
     world.subscribe_event('KeyUp', handle_keyup);
 
     world.subscribe_event('MouseDown', handle_mousedown);
+    world.subscribe_event('MouseMove', handle_mousemove);
     world.subscribe_event('MouseUp', handle_mouseup);
     world.subscribe_event('TouchStart', handle_touchstart);
+    world.subscribe_event('TouchMove', handle_touchmove);
     world.subscribe_event('TouchEnd', handle_touchend);
   }
 
@@ -36,12 +40,19 @@ class InputSystem extends System {
   void register_mousedown(MouseEvent e) {
     world.send_event('MouseDown', {'MouseEvent':e});
   }
+  void register_mousemove(MouseEvent e) {
+    world.send_event('MouseMove', {'MouseEvent':e});
+  }
   void register_mouseup(MouseEvent e) {
     world.send_event('MouseUp', {'MouseEvent':e});
   }
   void register_touchstart(TouchEvent e) {
     e.preventDefault();
     world.send_event('TouchStart', {'TouchEvent':e});
+  }
+  void register_touchmove(TouchEvent e) {
+    e.preventDefault();
+    world.send_event('TouchMove', {'TouchEvent':e});
   }
   void register_touchend(TouchEvent e) {
     e.preventDefault();
@@ -58,11 +69,9 @@ class InputSystem extends System {
   // These are called inside process events "inside" the gameloop
   void handle_keydown(Map event) {
     KeyEvent e = event['KeyEvent'];
-    print("KeyDown ${e.keyCode} ${e.charCode}");
   }
   void handle_keyup(Map event) {
     KeyEvent e = event['KeyEvent'];
-    print("KeyUp ${e.keyCode} ${e.charCode}");
   }
 
   // so it turns out the offsetLeft and offsetTop things are kind of odd but do what they say in the sense that
@@ -70,28 +79,32 @@ class InputSystem extends System {
   // I think/it seems you can add window.scrollX and window.scrollY if you care
   void handle_mousedown(Map event) {
     MouseEvent e = event['MouseEvent'];
-    int x = e.client.x-canvas.offsetLeft;
-    int y = e.client.y-canvas.offsetTop;
-    print("MouseDown $x $y");
+    int x = e.client.x-canvas.offsetLeft; int y = e.client.y-canvas.offsetTop;
+  }
+  void handle_mousemove(Map event) {
+    MouseEvent e = event['MouseEvent'];
+    int x = e.client.x-canvas.offsetLeft; int y = e.client.y-canvas.offsetTop;
   }
   void handle_mouseup(Map event) {
     MouseEvent e = event['MouseEvent'];
-    int x = e.client.x-canvas.offsetLeft;
-    int y = e.client.y-canvas.offsetTop;
-    print("MouseUp $x $y");
+    int x = e.client.x-canvas.offsetLeft; int y = e.client.y-canvas.offsetTop;
   }
   void handle_touchstart(Map event) {
     TouchEvent e = event['TouchEvent'];
     if (e.touches.length > 0) {
       Touch t = event['TouchEvent'].touches.first;
-      int x = t.client.x-canvas.offsetLeft;
-      int y = t.client.y-canvas.offsetTop;
-      print("TouchStart $x $y");
+      int x = t.client.x-canvas.offsetLeft; int y = t.client.y-canvas.offsetTop;
+    }
+  }
+  void handle_touchmove(Map event) {
+    TouchEvent e = event['TouchEvent'];
+    if (e.touches.length > 0) {
+      Touch t = event['TouchEvent'].touches.first;
+      int x = t.client.x-canvas.offsetLeft; int y = t.client.y-canvas.offsetTop;
     }
   }
   void handle_touchend(Map event) {
     TouchEvent e = event['TouchEvent'];
-    print("TouchEnd");
   }
 
   void process_entity(Entity entity) {}
