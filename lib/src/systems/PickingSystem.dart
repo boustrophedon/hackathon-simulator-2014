@@ -35,12 +35,19 @@ class PickingSystem extends System {
     
     render_picking_canvas(); // in the future maybe could only render part of the screen
 
+    pick_from_canvas(x,y);
+
+  }
+
+  void pick_from_canvas(int x, int y) {
     ImageData data = p_context.getImageData(x,y,1,1);
     var arr = data.data;
     num id = arr[0]*65536 + arr[1]*256 + arr[2];
     Entity e = id_map[id];
     if (e!=null) {
-      e.get_component(Position).y+=30;
+      world.globaldata['selected'] = e;
+      // x and y probably not necessary
+      world.send_event('EntitySelected', {'entity':e, 'x':x, 'y':y});
     }
   }
 

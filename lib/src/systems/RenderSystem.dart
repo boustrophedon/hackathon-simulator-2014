@@ -32,10 +32,12 @@ class RenderSystem extends System {
   }
 
   void process_entity(Entity entity) {
-    var pos = entity.get_component(Position); // need to define []= operator
+    var pos = entity.get_component(Position); // need to define [] operator
     draw_rect_at(pos.x, pos.y);
   }
 
+  //XXX i'd like to replace this with a, like, parametrizable XRenderer class, like RectRenderer and APIRenderer
+  // which i can then reuse in the picking thing by changing the parameters (which come from a component)
   void draw_rect_at(int x, int y) {
     context.save();
     context.fillStyle = 'rgb(0, 50, 200)';
