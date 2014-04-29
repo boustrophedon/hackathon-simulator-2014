@@ -14,7 +14,7 @@ class EntityLoadSystem extends System {
       Entity e = world.new_entity();
       e.add_component(new Kind('api'));
       e.add_component(new Position(i*60, 0));
-      e.add_component(new Picking());
+      e.add_component(new Selection());
       e.add_to_world();
     }
   }

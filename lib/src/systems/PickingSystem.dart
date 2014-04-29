@@ -10,7 +10,7 @@ class PickingSystem extends System {
   Map<int, Entity> id_map;
 
   PickingSystem(World world) : super(world) {
-    components_wanted = new Set.from([Position,Picking]);
+    components_wanted = new Set.from([Position,Selection]);
 
     id_map = new Map<int, Entity>();
 

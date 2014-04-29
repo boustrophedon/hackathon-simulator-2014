@@ -11,6 +11,6 @@ class Kind implements Component {
   Kind(this.kind);
 }
 
-class Selectable implements Component { 
-  Selectable();
+class Selection implements Component { 
+  Selection();
 }
