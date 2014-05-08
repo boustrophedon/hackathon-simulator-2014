@@ -14,3 +14,10 @@ class Kind implements Component {
 class Selection implements Component { 
   Selection();
 }
+
+class Puzzle implements Component {
+  // need some sort of shape data here
+  // and orientation I guess
+  // and api name
+  Puzzle();
+}

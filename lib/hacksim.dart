@@ -10,6 +10,7 @@ part 'src/systems/InputSystem.dart';
 part 'src/systems/RenderSystem.dart';
 part 'src/systems/EntityLoadSystem.dart';
 part 'src/systems/PickingSystem.dart';
+part 'src/systems/PieceSystem.dart';
 
 World create_world() {
   World world = new World();
@@ -17,6 +18,7 @@ World create_world() {
   world.register_system(new InputSystem(world));
   world.register_system(new RenderSystem(world));
   world.register_system(new PickingSystem(world));
+  world.register_system(new PieceSystem(world));
   return world;
 }
 

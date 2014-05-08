@@ -15,6 +15,7 @@ class EntityLoadSystem extends System {
       e.add_component(new Kind('api'));
       e.add_component(new Position(i*60, 0));
       e.add_component(new Selection());
+      e.add_component(new Puzzle());
       e.add_to_world();
     }
   }

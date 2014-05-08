@@ -45,9 +45,15 @@ class PickingSystem extends System {
     num id = arr[0]*65536 + arr[1]*256 + arr[2];
     Entity e = id_map[id];
     if (e!=null) {
-      world.globaldata['selected'] = e;
-      // x and y probably not necessary
-      world.send_event('EntitySelected', {'entity':e, 'x':x, 'y':y});
+      if (world.globaldata['selected'] == e) {
+        world.globaldata['selected'] = null;
+        world.send_event('EntityDeselected', {'entity':e, 'x':x, 'y':y});
+      }
+      else {
+        world.globaldata['selected'] = e;
+        // x and y are screen coords, probably not necessary here but might be for, eg, ground selection -> world coords in a moba or something
+        world.send_event('EntitySelected', {'entity':e, 'x':x, 'y':y});
+      }
     }
   }
 
