@@ -5,12 +5,16 @@ import 'dart:html';
 import 'package:entity_component/entity_component.dart';
 
 part 'src/components.dart';
+
 part 'src/systems/TestSystem.dart';
 part 'src/systems/InputSystem.dart';
 part 'src/systems/RenderSystem.dart';
 part 'src/systems/EntityLoadSystem.dart';
 part 'src/systems/PickingSystem.dart';
 part 'src/systems/PieceSystem.dart';
+
+part 'src/renderers/Renderer.dart';
+part 'src/renderers/PuzzleRenderer.dart';
 
 World create_world() {
   World world = new World();

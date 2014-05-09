@@ -7,6 +7,8 @@ class RenderSystem extends System {
 
   int screen_width;
   int screen_height;
+  
+  PuzzleRenderer puzzle_renderer;
 
   RenderSystem(World world) : super(world) {
     components_wanted = new Set.from([Position,]);
@@ -22,6 +24,8 @@ class RenderSystem extends System {
     context = canvas.context2D;
     screen_width = canvas.width;
     screen_height = canvas.height;
+
+    puzzle_renderer = new PuzzleRenderer(canvas, context);
   }
 
   void process() {
@@ -32,17 +36,9 @@ class RenderSystem extends System {
   }
 
   void process_entity(Entity entity) {
-    var pos = entity.get_component(Position); // need to define [] operator
-    draw_rect_at(pos.x, pos.y);
-  }
-
-  //XXX i'd like to replace this with a, like, parametrizable XRenderer class, like RectRenderer and APIRenderer
-  // which i can then reuse in the picking thing by changing the parameters (which come from a component)
-  void draw_rect_at(int x, int y) {
-    context.save();
-    context.fillStyle = 'rgb(0, 50, 200)';
-    context.fillRect(x, y, 40, 40);
-    context.restore();
+    if (entity.has_component(Puzzle)) {
+      puzzle_renderer.renderEntity(entity);
+    }
   }
 }
 
