@@ -6,5 +6,5 @@ class Renderer {
 
   Renderer(this.canvas, this.context);
 
-  void renderEntity(Entity e) {}
+  void render_entity(Entity e) {}
 }

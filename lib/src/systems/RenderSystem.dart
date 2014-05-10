@@ -37,7 +37,7 @@ class RenderSystem extends System {
 
   void process_entity(Entity entity) {
     if (entity.has_component(Puzzle)) {
-      puzzle_renderer.renderEntity(entity);
+      puzzle_renderer.render_entity(entity);
     }
   }
 }

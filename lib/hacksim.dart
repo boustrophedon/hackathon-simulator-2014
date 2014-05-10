@@ -15,6 +15,7 @@ part 'src/systems/PieceSystem.dart';
 
 part 'src/renderers/Renderer.dart';
 part 'src/renderers/PuzzleRenderer.dart';
+part 'src/renderers/PickingRenderer.dart';
 
 World create_world() {
   World world = new World();

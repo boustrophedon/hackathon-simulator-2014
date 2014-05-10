@@ -4,10 +4,15 @@ class PickingSystem extends System {
   CanvasElement p_canvas;
   CanvasRenderingContext2D p_context;
 
+  PickingRenderer picking_renderer;
+
   int width;
   int height;
 
   Map<int, Entity> id_map;
+
+  int cur_id = 10;
+  int max_id = 0xFFFFFF;
 
   PickingSystem(World world) : super(world) {
     components_wanted = new Set.from([Position,Selection]);
@@ -26,8 +31,8 @@ class PickingSystem extends System {
     p_canvas = new CanvasElement(width: width, height: height);
     p_canvas.id = "picking";
     p_context = p_canvas.context2D;
-    p_context.fillStyle = '#000000';
-    p_context.clearRect(0,0,width,height);
+
+    picking_renderer = new PickingRenderer(p_canvas, p_context);
   }
 
   void handle_click(Map event) {
@@ -60,20 +65,23 @@ class PickingSystem extends System {
   void render_picking_canvas() {
     p_context.clearRect(0,0,width,height);
 
-    int i = 230;
     for (Entity e in entities) {
-      Position pos = e.get_component(Position);
-      
-      id_map[i] = e;
-
-      p_context.save();
-      p_context.fillStyle = '#'+i.toRadixString(16).padLeft(6, '0');
-      p_context.fillRect(pos.x, pos.y, 40, 40); // 40 is magic. need to make a size or rendering component or something.
-      p_context.restore();
-
-      i+=10;
+      picking_renderer.render_entity(e);
     }
   }
 
-  void process_entity(Entity e) {}
+  void process_entity(Entity e) {
+    Selection pick = e.get_component(Selection);
+    if (pick.id == null) {
+      pick.id = cur_id;
+
+      id_map[cur_id] = e;
+
+      cur_id+=10;
+      // this is dumb but whatever
+      if (cur_id > max_id) {
+        cur_id = 5;
+      }
+    }
+  }
 }

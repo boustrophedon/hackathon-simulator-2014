@@ -12,6 +12,7 @@ class Kind implements Component {
 }
 
 class Selection implements Component { 
+  int id;
   Selection();
 }
 
