@@ -70,7 +70,7 @@ class PickingSystem extends System {
     }
   }
 
-  void process_entity(Entity e) {
+  void process_new_entity(Entity e) {
     Selection pick = e.get_component(Selection);
     if (pick.id == null) {
       pick.id = cur_id;
@@ -84,4 +84,7 @@ class PickingSystem extends System {
       }
     }
   }
+
+  void process_entity(Entity e) {}
+
 }
