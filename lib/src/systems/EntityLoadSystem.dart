@@ -27,7 +27,7 @@ class EntityLoadSystem extends System {
       Entity e = world.new_entity();
       e.add_component(new Kind('api slot'));
       e.add_component(new Size(60, 60));
-      e.add_component(new Position(40, 100+(40*i)));
+      e.add_component(new Position(40, 100+(80*i)));
       e.add_component(new Selection());
       e.add_component(new APISlot());
       e.add_to_world();

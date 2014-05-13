@@ -1,6 +1,7 @@
 library hacksim;
 
 import 'dart:html';
+import 'dart:math' as math;
 
 import 'package:entity_component/entity_component.dart';
 
@@ -12,9 +13,11 @@ part 'src/systems/RenderSystem.dart';
 part 'src/systems/EntityLoadSystem.dart';
 part 'src/systems/PickingSystem.dart';
 part 'src/systems/APISystem.dart';
+part 'src/systems/APISlotSystem.dart';
 
 part 'src/renderers/Renderer.dart';
 part 'src/renderers/APIRenderer.dart';
+part 'src/renderers/APISlotRenderer.dart';
 part 'src/renderers/PickingRenderer.dart';
 
 World create_world() {
@@ -24,6 +27,7 @@ World create_world() {
   world.register_system(new RenderSystem(world));
   world.register_system(new PickingSystem(world));
   world.register_system(new APISystem(world));
+  world.register_system(new APISlotSystem(world));
   return world;
 }
 
