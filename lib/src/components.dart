@@ -6,6 +6,12 @@ class Position implements Component {
   Position(this.x, this.y);
 }
 
+class Size implements Component {
+  int width;
+  int height;
+  Size(this.width, this.height);
+}
+
 class Kind implements Component {
   String kind;
   Kind(this.kind);

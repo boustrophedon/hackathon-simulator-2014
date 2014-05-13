@@ -11,7 +11,7 @@ class RenderSystem extends System {
   PuzzleRenderer puzzle_renderer;
 
   RenderSystem(World world) : super(world) {
-    components_wanted = new Set.from([Position,]);
+    components_wanted = new Set.from([Position,Size]);
   }
 
   void initialize() {

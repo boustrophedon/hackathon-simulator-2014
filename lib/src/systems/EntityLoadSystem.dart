@@ -13,7 +13,8 @@ class EntityLoadSystem extends System {
     for (int i = 0; i<5; i++) {
       Entity e = world.new_entity();
       e.add_component(new Kind('api'));
-      e.add_component(new Position(i*60, 0));
+      e.add_component(new Size(40, 40));
+      e.add_component(new Position(i*(40+20), 0));
       e.add_component(new Selection());
       e.add_component(new Puzzle());
       e.add_to_world();
