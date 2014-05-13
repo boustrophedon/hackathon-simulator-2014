@@ -1,6 +1,10 @@
 you are at a hackathon
 you are pitched a bunch of apis and you get api keys that allow you to use them
 you can put these api keys together based on some attributes they have (like puzzle pieces only certain ones go together)
+	different api keys have different colors
+	you have x slots, which increase over time (can buy upgrades for more slots/more apis i guess)
+	put the keys in the slots
+
 while you are doing this, you get email spam from recruiters that you have to avoid. (choose right decline phrase from list)
 when you think you have a good app, you submit it to your hackathon. you gain hacker cred arbitrarily based on how much the crowd likes your app.
 depending on your hacker cred, you can serve your users ads, which gain you revenue, with which you can buy more api keys

@@ -8,7 +8,7 @@ class RenderSystem extends System {
   int screen_width;
   int screen_height;
   
-  PuzzleRenderer puzzle_renderer;
+  APIRenderer api_renderer;
 
   RenderSystem(World world) : super(world) {
     components_wanted = new Set.from([Position,Size]);
@@ -25,7 +25,7 @@ class RenderSystem extends System {
     screen_width = canvas.width;
     screen_height = canvas.height;
 
-    puzzle_renderer = new PuzzleRenderer(canvas, context);
+    api_renderer = new APIRenderer(canvas, context);
   }
 
   void process() {
@@ -36,8 +36,8 @@ class RenderSystem extends System {
   }
 
   void process_entity(Entity entity) {
-    if (entity.has_component(Puzzle)) {
-      puzzle_renderer.render_entity(entity);
+    if (entity.has_component(API)) {
+      api_renderer.render_entity(entity);
     }
   }
 }

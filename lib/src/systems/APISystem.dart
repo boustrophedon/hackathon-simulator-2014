@@ -1,12 +1,12 @@
 part of hacksim;
 
-class PieceSystem extends System {
+class APISystem extends System {
   Entity current_piece = null;
   int xoffset;
   int yoffset;
 
-  PieceSystem(World world) : super(world) {
-    components_wanted = new Set.from([Position, Selection, Puzzle]);
+  APISystem(World world) : super(world) {
+    components_wanted = new Set.from([Position, Selection, API]);
 
     world.subscribe_event('EntitySelected', handle_select);
     world.subscribe_event('EntityDeselected', handle_deselect);
@@ -21,7 +21,7 @@ class PieceSystem extends System {
 
   void handle_select(Map event) {
     Entity e = event['entity'];
-    if (e.has_component(Puzzle)) {
+    if (e.has_component(API)) {
       current_piece = e;
       Position pos = e.get_component(Position);
       xoffset = event['x'] - pos.x;
@@ -30,7 +30,7 @@ class PieceSystem extends System {
   }
 
   void handle_deselect(Map event) {
-    if (event['entity'].has_component(Puzzle)) {
+    if (event['entity'].has_component(API)) {
       current_piece = null;
     }
   }

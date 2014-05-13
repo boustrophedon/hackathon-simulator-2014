@@ -1,7 +1,7 @@
 part of hacksim;
 
-class PuzzleRenderer extends Renderer {
-  PuzzleRenderer(CanvasElement canv, CanvasRenderingContext2D ctx) : super(canv, ctx);
+class APIRenderer extends Renderer {
+  APIRenderer(CanvasElement canv, CanvasRenderingContext2D ctx) : super(canv, ctx);
 
   void render_entity(Entity e) {
     Position pos = e.get_component(Position);

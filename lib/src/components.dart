@@ -22,9 +22,20 @@ class Selection implements Component {
   Selection();
 }
 
-class Puzzle implements Component {
+class API implements Component {
   // need some sort of shape data here
   // and orientation I guess
   // and api name
-  Puzzle();
+  List<int> color;
+  API() {
+    color = new List<int>(3);
+  }
+}
+
+class APISlot implements Component {
+  Entity api_inside = null;
+  List<int> color; // apis can only go inside ones with matching colors
+  APISlot() {
+    color = new List<int>(3);
+  }
 }
