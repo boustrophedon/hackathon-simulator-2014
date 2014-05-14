@@ -11,10 +11,7 @@ class PickingRenderer extends Renderer {
     Position pos = e.get_component(Position);
     Size size = e.get_component(Size);
 
-    context.save();
     context.fillStyle = '#'+(sel.id).toRadixString(16).padLeft(6, '0');
     context.fillRect(pos.x, pos.y, size.width, size.height);
-    context.restore();
-
   }
 }

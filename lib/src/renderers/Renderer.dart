@@ -3,8 +3,34 @@ part of hacksim;
 class Renderer {
   CanvasElement canvas;
   CanvasRenderingContext2D context;
+  List<Entity> entities;
 
-  Renderer(this.canvas, this.context);
+  Renderer(CanvasElement canv, CanvasRenderingContext2D ctx) {
+    canvas = canv;
+    context = ctx;
+    entities = new List<Entity>();
+  }
+
+  // not necessary for me now but would be nice to have in the future
+  // and super easy to implement here and now while i'm at it.
+  void setup() {
+    context.save();
+  }
+  void teardown() {
+    context.restore();
+  }
+
+  void render_entities() {
+    setup();
+    for (Entity e in entities) {
+      render_entity(e);
+    }
+    teardown();
+  }
+
+  void add_entity(Entity e) {
+    entities.add(e);
+  }
 
   void render_entity(Entity e) {}
 }

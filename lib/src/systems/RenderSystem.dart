@@ -8,6 +8,8 @@ class RenderSystem extends System {
   int screen_width;
   int screen_height;
   
+  LinkedHashMap<String, Renderer> renderers;
+
   APIRenderer api_renderer;
   APISlotRenderer slot_renderer;
 
@@ -26,29 +28,24 @@ class RenderSystem extends System {
     screen_width = canvas.width;
     screen_height = canvas.height;
 
-    api_renderer = new APIRenderer(canvas, context);
-    slot_renderer = new APISlotRenderer(canvas, context);
+    // order of renderers specified here specifies draw order. first in first out -> last thing added gets drawn on top
+    renderers = new Map<String, Renderer>();
+    renderers['api slot'] = new APISlotRenderer(canvas, context);
+    renderers['api'] = new APIRenderer(canvas, context);
   }
 
   void process() {
     context.clearRect(0, 0, screen_width, screen_height);
-    for (Entity e in entities) {
-      process_entity(e);
+    for (Renderer r in renderers.values) {
+      r.render_entities();
     }
   }
+  void process_entity(Entity e) {}
 
-  void process_entity(Entity entity) {
-    // this needs to be optimized to add entities to renderers and then just call render on the renderer
-    // rather than selecting the entities per frame
-    //
-    // the renderers themselves need to set up the rendering contexts and then not do .save/.restore
-    //
-    // also should do something about manually ordering them here
-    if (entity.has_component(APISlot)) {
-      slot_renderer.render_entity(entity);
-    }
-    else if (entity.has_component(API)) {
-      api_renderer.render_entity(entity);
+  void process_new_entity(Entity entity) {
+    Kind kind = entity.get_component(Kind);
+    if (renderers.containsKey(kind.kind)) {
+      renderers[kind.kind].add_entity(entity);
     }
   }
 }

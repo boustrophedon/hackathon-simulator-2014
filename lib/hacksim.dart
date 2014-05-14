@@ -2,6 +2,7 @@ library hacksim;
 
 import 'dart:html';
 import 'dart:math' as math;
+import 'dart:collection';
 
 import 'package:entity_component/entity_component.dart';
 

@@ -65,9 +65,7 @@ class PickingSystem extends System {
   void render_picking_canvas() {
     p_context.clearRect(0,0,width,height);
 
-    for (Entity e in entities) {
-      picking_renderer.render_entity(e);
-    }
+    picking_renderer.render_entities();
   }
 
   void process_new_entity(Entity e) {
@@ -83,6 +81,9 @@ class PickingSystem extends System {
         cur_id = 5;
       }
     }
+
+    picking_renderer.add_entity(e);
+
   }
 
   void process_entity(Entity e) {}
