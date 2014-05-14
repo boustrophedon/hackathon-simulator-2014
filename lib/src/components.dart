@@ -39,7 +39,5 @@ class API implements Component {
 class APISlot implements Component {
   Entity api_inside = null;
   List<int> color; // apis can only go inside ones with matching colors
-  APISlot() {
-    color = new List<int>(3);
-  }
+  APISlot(this.color);
 }
