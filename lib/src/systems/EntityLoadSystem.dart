@@ -17,6 +17,7 @@ class EntityLoadSystem extends System {
       e.add_component(new Size(40, 40));
       e.add_component(new Position(i*(40+20), 0));
       e.add_component(new Selection());
+      e.add_component(new Draggable());
       e.add_component(new API());
       e.add_to_world();
     }
@@ -29,6 +30,7 @@ class EntityLoadSystem extends System {
       e.add_component(new Size(60, 60));
       e.add_component(new Position(40, 100+(80*i)));
       e.add_component(new Selection());
+      e.add_component(new Draggable());
       e.add_component(new APISlot());
       e.add_to_world();
     }

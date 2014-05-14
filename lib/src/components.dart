@@ -22,6 +22,10 @@ class Selection implements Component {
   Selection();
 }
 
+class Draggable implements Component {
+  Draggable();
+}
+
 class API implements Component {
   // need some sort of shape data here
   // and orientation I guess

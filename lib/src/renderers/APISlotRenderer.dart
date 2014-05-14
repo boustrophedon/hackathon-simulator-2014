@@ -12,7 +12,7 @@ class APISlotRenderer extends Renderer {
     context.fillStyle = 'rgb(${slot.color[0]}, ${slot.color[1]}, ${slot.color[2]})';
     context.fillRect(pos.x, pos.y, size.width, size.height);
 
-    context.fillStyle = 'rgb(0,0,0)';
+    context.fillStyle = 'rgb(255,255,255)';
     context.fillRect(pos.x+10, pos.y+10, size.width-20, size.height-20);
 
     context.restore();

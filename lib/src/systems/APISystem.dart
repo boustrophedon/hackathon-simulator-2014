@@ -6,42 +6,12 @@ class APISystem extends System {
   int yoffset;
 
   APISystem(World world) : super(world) {
-    components_wanted = new Set.from([Position, Selection, API]);
-
-    world.subscribe_event('EntitySelected', handle_select);
-    world.subscribe_event('EntityDeselected', handle_deselect);
-    world.subscribe_event('MouseMove', handle_move);
+    components_wanted = new Set.from([Position, API]);
   }
 
   void initialize() {
   }
 
-  void process_entity(Entity e) {
-  }
-
-  void handle_select(Map event) {
-    Entity e = event['entity'];
-    if (e.has_component(API)) {
-      current_piece = e;
-      Position pos = e.get_component(Position);
-      xoffset = event['x'] - pos.x;
-      yoffset = event['y'] - pos.y;
-    }
-  }
-
-  void handle_deselect(Map event) {
-    if (event['entity'].has_component(API)) {
-      current_piece = null;
-    }
-  }
-
-  // i feel like this should be somewhere else
-  void handle_move(Map event) {
-    if (current_piece != null) {
-      Position pos = current_piece.get_component(Position);
-      pos.x = event['x'] - xoffset;
-      pos.y = event['y'] - yoffset;
-    }
-  }
+  void process_entity(Entity e) {}
 
 }

@@ -12,6 +12,7 @@ part 'src/systems/InputSystem.dart';
 part 'src/systems/RenderSystem.dart';
 part 'src/systems/EntityLoadSystem.dart';
 part 'src/systems/PickingSystem.dart';
+part 'src/systems/DragSystem.dart';
 part 'src/systems/APISystem.dart';
 part 'src/systems/APISlotSystem.dart';
 
@@ -26,6 +27,7 @@ World create_world() {
   world.register_system(new InputSystem(world));
   world.register_system(new RenderSystem(world));
   world.register_system(new PickingSystem(world));
+  world.register_system(new DragSystem(world));
   world.register_system(new APISystem(world));
   world.register_system(new APISlotSystem(world));
   return world;
