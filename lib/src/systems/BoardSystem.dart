@@ -22,7 +22,7 @@ class Board {
     int hack_top = 0;
     int hack_left = purchase_right;
     int hack_right = width;
-    int hack_bottom = ui_bottom;
+    int hack_bottom = ui_top;
 
     purchase_area = new Rectangle.fromPoints(new Point(purchase_left, purchase_top), new Point(purchase_right, purchase_bottom));
     ui_area = new Rectangle.fromPoints(new Point(ui_left, ui_top), new Point(ui_right, ui_bottom));

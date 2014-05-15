@@ -134,17 +134,46 @@ class DragSystem extends System {
 
   // these are separate because initially i wanted apis to snap into api slots as they were moving
   void move_api(Entity e, int x, int y) {
+    if (check_bounds(e, x, y)) {
+      return;
+    }
     Position pos = e.get_component(Position);
     pos.x = x - xoffset;
     pos.y = y - yoffset;
   }
   
   void move_api_slot(Entity e, int x, int y) {
+    if (check_bounds(e, x, y)) {
+      return;
+    }
     Position pos = e.get_component(Position);
     pos.x = x - xoffset;
     pos.y = y - yoffset;
   }
 
+  bool check_bounds(Entity e, int x, int y) {
+    Position pos = e.get_component(Position);
+    Size size = e.get_component(Size);
+    Board board = world.globaldata['board'];
+    //if ((pos.x >= board.hack_area.left) && (pos.y+size.height <= board.hack_area.bottom)) {
+    //  if ((x-xoffset <= board.hack_area.left) || (y-yoffset+size.height >= board.hack_area.bottom)) { // new position is outside
+    //    return true;
+    //  }
+    //  else {
+    //    return false;
+    //  }
+    //}
+
+    if ((pos.x >= board.hack_area.left) && (x-xoffset <= board.hack_area.left)) {
+      return true;
+    }
+    else if ((pos.y+size.height <= board.hack_area.bottom) && (y-yoffset+size.height >= board.hack_area.bottom)) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
 }
 
 num distance(Entity e1, Entity e2) {
