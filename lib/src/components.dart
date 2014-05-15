@@ -31,13 +31,20 @@ class API implements Component {
   // and orientation I guess
   // and api name
   List<int> color;
-  API() {
-    color = new List<int>(3);
+  String color_string;
+  Entity current_apislot = null;
+  API(List<int> col) {
+    color = col;
+    color_string = "${color[0]}, ${color[1]}, ${color[2]}";
   }
 }
 
 class APISlot implements Component {
   Entity api_inside = null;
   List<int> color; // apis can only go inside ones with matching colors
-  APISlot(this.color);
+  String color_string;
+  APISlot(List<int> col) {
+    color = col;
+    color_string = "${color[0]}, ${color[1]}, ${color[2]}";
+  }
 }

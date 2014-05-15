@@ -41,7 +41,7 @@ class EntityLoadSystem extends System {
       e.add_component(new Position(i*(40+20), 0));
       e.add_component(new Selection());
       e.add_component(new Draggable());
-      e.add_component(new API());
+      e.add_component(new API(color_from_colorpool()));
       e.add_to_world();
     }
   }

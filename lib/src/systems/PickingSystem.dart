@@ -51,14 +51,18 @@ class PickingSystem extends System {
     Entity e = id_map[id];
     if (e!=null) {
       if (world.globaldata['selected'] == e) {
-        world.globaldata['selected'] = null;
         world.send_event('EntityDeselected', {'entity':e, 'x':x, 'y':y});
+        world.globaldata['selected'] = null;
       }
       else {
         world.globaldata['selected'] = e;
         // x and y are screen coords, probably not necessary here but might be for, eg, ground selection -> world coords in a moba or something
         world.send_event('EntitySelected', {'entity':e, 'x':x, 'y':y});
       }
+    }
+    else if (world.globaldata['selected'] != null) {
+      world.send_event('EntityDeselected', {'entity':world.globaldata['selected'], 'x':x, 'y':y});
+      world.globaldata['selected'] = null;
     }
   }
 
