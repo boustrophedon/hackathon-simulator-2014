@@ -16,21 +16,26 @@ part 'src/systems/PickingSystem.dart';
 part 'src/systems/DragSystem.dart';
 part 'src/systems/APISystem.dart';
 part 'src/systems/APISlotSystem.dart';
+part 'src/systems/UISystem.dart';
+part 'src/systems/BoardSystem.dart';
 
 part 'src/renderers/Renderer.dart';
 part 'src/renderers/APIRenderer.dart';
 part 'src/renderers/APISlotRenderer.dart';
 part 'src/renderers/PickingRenderer.dart';
+part 'src/renderers/BoardRenderer.dart';
 
 World create_world() {
   World world = new World();
-  world.register_system(new EntityLoadSystem(world));
-  world.register_system(new InputSystem(world));
+  world.register_system(new BoardSystem(world));
   world.register_system(new RenderSystem(world));
+  world.register_system(new InputSystem(world));
   world.register_system(new PickingSystem(world));
   world.register_system(new DragSystem(world));
   world.register_system(new APISystem(world));
   world.register_system(new APISlotSystem(world));
+  world.register_system(new UISystem(world));
+  world.register_system(new EntityLoadSystem(world));
   return world;
 }
 

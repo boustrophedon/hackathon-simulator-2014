@@ -5,6 +5,12 @@ import 'dart:html';
 
 void main() {
   World w = create_world();
-  w.globaldata['canvas'] = querySelector('#area');
+
+  CanvasElement canvas = querySelector('#area');
+  // make the canvas the full size of the window
+  canvas.height = window.innerHeight;
+  canvas.width = window.innerWidth;
+  
+  w.globaldata['canvas'] = canvas;
   w.run();
 }

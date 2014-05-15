@@ -10,9 +10,6 @@ class RenderSystem extends System {
   
   LinkedHashMap<String, Renderer> renderers;
 
-  APIRenderer api_renderer;
-  APISlotRenderer slot_renderer;
-
   RenderSystem(World world) : super(world) {
     components_wanted = new Set.from([Position,Size]);
   }
@@ -20,16 +17,13 @@ class RenderSystem extends System {
   void initialize() {
     canvas = world.globaldata['canvas'];
 
-    // make the canvas the full size of the window
-    canvas.height = window.innerHeight;
-    canvas.width = window.innerWidth;
-
     context = canvas.context2D;
     screen_width = canvas.width;
     screen_height = canvas.height;
 
     // order of renderers specified here specifies draw order. first in first out -> last thing added gets drawn on top
     renderers = new Map<String, Renderer>();
+    renderers['board'] = new BoardRenderer(canvas, context, world.globaldata['board']);
     renderers['api slot'] = new APISlotRenderer(canvas, context);
     renderers['api'] = new APIRenderer(canvas, context);
   }
