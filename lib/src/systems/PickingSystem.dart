@@ -21,6 +21,7 @@ class PickingSystem extends System {
 
     world.subscribe_event('MouseDown', handle_click);
     world.subscribe_event('TouchStart', handle_click);
+    world.subscribe_event('TouchEnd', handle_touchend); // kind of a hack
   }
 
   void initialize() {
@@ -37,11 +38,27 @@ class PickingSystem extends System {
 
   void handle_click(Map event) {
     int x = event['x']; int y = event['y'];
-    
     render_picking_canvas(); // in the future maybe could only render part of the screen
 
     pick_from_canvas(x,y);
 
+  }
+
+  void handle_touchend(Map event) {
+    if (world.globaldata['selected'] != null) {
+      deselect_current();
+    }
+  }
+
+  void select_current(Entity e, int x, int y) {
+    world.globaldata['selected'] = e;
+    // x and y are screen coords, probably not necessary here but might be for, eg, ground selection -> world coords in a moba or something
+    world.send_event('EntitySelected', {'entity':e, 'x':x, 'y':y});
+  }
+
+  void deselect_current() {
+    world.send_event('EntityDeselected', {'entity':world.globaldata['selected']});
+    world.globaldata['selected'] = null;
   }
 
   void pick_from_canvas(int x, int y) {
@@ -51,18 +68,14 @@ class PickingSystem extends System {
     Entity e = id_map[id];
     if (e!=null) {
       if (world.globaldata['selected'] == e) {
-        world.send_event('EntityDeselected', {'entity':e, 'x':x, 'y':y});
-        world.globaldata['selected'] = null;
+        deselect_current();
       }
       else {
-        world.globaldata['selected'] = e;
-        // x and y are screen coords, probably not necessary here but might be for, eg, ground selection -> world coords in a moba or something
-        world.send_event('EntitySelected', {'entity':e, 'x':x, 'y':y});
+        select_current(e, x, y);
       }
     }
     else if (world.globaldata['selected'] != null) {
-      world.send_event('EntityDeselected', {'entity':world.globaldata['selected'], 'x':x, 'y':y});
-      world.globaldata['selected'] = null;
+      deselect_current();
     }
   }
 

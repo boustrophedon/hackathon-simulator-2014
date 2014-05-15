@@ -15,6 +15,7 @@ class DragSystem extends System {
     world.subscribe_event('EntitySelected', handle_select);
     world.subscribe_event('EntityDeselected', handle_deselect);
     world.subscribe_event('MouseMove', handle_move);
+    world.subscribe_event('TouchMove', handle_move);
   }
 
   void initialize() {
