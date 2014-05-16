@@ -18,6 +18,7 @@ part 'src/systems/APISystem.dart';
 part 'src/systems/APISlotSystem.dart';
 part 'src/systems/UISystem.dart';
 part 'src/systems/BoardSystem.dart';
+part 'src/systems/MoneySystem.dart';
 
 part 'src/renderers/Renderer.dart';
 part 'src/renderers/APIRenderer.dart';
@@ -35,6 +36,7 @@ World create_world() {
   world.register_system(new DragSystem(world));
   world.register_system(new APISystem(world));
   world.register_system(new APISlotSystem(world));
+  world.register_system(new MoneySystem(world));
   world.register_system(new UISystem(world));
   world.register_system(new EntityLoadSystem(world));
   return world;
