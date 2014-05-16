@@ -15,7 +15,7 @@ class UISystem extends System {
     int x = board.ui_area.left + 50;
     int y = board.ui_area.top + 50;
     create_button(x,y, "Buy API Key");
-    create_button(x+button_width+(button_width/2),y, "Buy API Slot");
+    create_button(x+button_width+(button_width~/2),y, "Buy API Slot");
   }
 
   void create_button(int x, int y, String text) {
@@ -24,7 +24,7 @@ class UISystem extends System {
     b.add_component(new Size(button_width,button_height));
     b.add_component(new Position(x, y));
     b.add_component(new Selection());
-    b.add_component(new UIButton(text, [255,255,255]));
+    b.add_component(new UIButton(text, [0,0,0], [0,0,0], 22)); // hardcoded font size is bad
     b.add_to_world();
   }
 

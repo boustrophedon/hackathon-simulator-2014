@@ -51,11 +51,20 @@ class APISlot implements Component {
 
 class UIButton implements Component {
   String text;
-  List<int> color;
-  String color_string;
-  UIButton(String txt, List<int> col) {
-    text = txt;
-    color = col;
-    color_string = "${color[0]}, ${color[1]}, ${color[2]}";
+  List<int> font_color;
+  List<int> border_color;
+  String font_color_string;
+  String border_color_string;
+  String font;
+  UIButton(String text, List<int> font_color, List<int> border_color, int fontsize) {
+    this.text = text;
+ 
+    this.font_color = font_color;
+    this.font_color_string = "${font_color[0]}, ${font_color[1]}, ${font_color[2]}";
+
+    this.border_color = border_color;
+    this.border_color_string = "${border_color[0]}, ${border_color[1]}, ${border_color[2]}";
+
+    this.font = "${fontsize}pt Comic Sans"; //lel
   }
 }

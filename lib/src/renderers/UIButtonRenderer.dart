@@ -19,10 +19,13 @@ class UIButtonRenderer extends Renderer {
     Size size = e.get_component(Size);
     UIButton button = e.get_component(UIButton);
 
-    context.fillStyle = 'rgb(${button.color_string})';
-    context.strokeStyle = 'rgb(0,0,0)';
+    context.strokeStyle = 'rgb(${button.border_color_string})';
 
     draw_rounded_rect(context, pos.x, pos.y, size.width, size.height, 20); // radius of 20 is arbitrary for now
     context.stroke();
+
+    context.fillStyle = 'rgb(${button.font_color_string})';
+    context.font = button.font;
+    context.fillText(button.text, pos.x+(size.width~/16), pos.y+(size.height~/2)); // these are hardcoded and bad
   }
 } 
