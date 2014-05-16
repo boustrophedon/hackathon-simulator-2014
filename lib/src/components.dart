@@ -56,7 +56,8 @@ class UIButton implements Component {
   String font_color_string;
   String border_color_string;
   String font;
-  UIButton(String text, List<int> font_color, List<int> border_color, int fontsize) {
+  String action;
+  UIButton(String text, List<int> font_color, List<int> border_color, int fontsize, String action) {
     this.text = text;
  
     this.font_color = font_color;
@@ -66,5 +67,7 @@ class UIButton implements Component {
     this.border_color_string = "${border_color[0]}, ${border_color[1]}, ${border_color[2]}";
 
     this.font = "${fontsize}pt Comic Sans"; //lel
+
+    this.action = action; // I don't really like action going with all the style stuff, but I don't really want to give it its own component either
   }
 }
