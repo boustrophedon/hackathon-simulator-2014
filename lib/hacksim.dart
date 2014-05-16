@@ -24,6 +24,7 @@ part 'src/renderers/APIRenderer.dart';
 part 'src/renderers/APISlotRenderer.dart';
 part 'src/renderers/PickingRenderer.dart';
 part 'src/renderers/BoardRenderer.dart';
+part 'src/renderers/UIButtonRenderer.dart';
 
 World create_world() {
   World world = new World();

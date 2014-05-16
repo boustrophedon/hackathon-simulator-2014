@@ -41,6 +41,10 @@ class DragSystem extends System {
       else if (kind.kind == 'api slot') {
         pickup_apislot(event, e);
       }
+      else {
+        current = e;
+        set_offsets(event['x'], event['y'], current.get_component(Position));
+      }
     }
   }
 
@@ -82,7 +86,14 @@ class DragSystem extends System {
       else if (kind.kind == "api slot") {
         drop_apislot(event, e);
       }
+      else {
+        drop_other(event, e);
+      }
     }
+  }
+
+  void drop_other(Map event, Entity e) {
+    current = null;
   }
 
   void drop_api(Map event, Entity api) {
@@ -130,7 +141,16 @@ class DragSystem extends System {
       else if (kind.kind == "api slot") {
         move_api_slot(current, event['x'], event['y']);
       }
+      else {
+        move_other(current, event['x'], event['y']);
+      }
     }
+  }
+
+  void move_other(Entity e, int x, int y) {
+    Position pos = e.get_component(Position);
+    pos.x = x - xoffset;
+    pos.y = y - yoffset;
   }
 
   // these are separate because initially i wanted apis to snap into api slots as they were moving

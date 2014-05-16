@@ -41,9 +41,20 @@ class API implements Component {
 
 class APISlot implements Component {
   Entity api_inside = null;
-  List<int> color; // apis can only go inside ones with matching colors
+  List<int> color;
   String color_string;
   APISlot(List<int> col) {
+    color = col;
+    color_string = "${color[0]}, ${color[1]}, ${color[2]}";
+  }
+}
+
+class UIButton implements Component {
+  String text;
+  List<int> color;
+  String color_string;
+  UIButton(String txt, List<int> col) {
+    text = txt;
     color = col;
     color_string = "${color[0]}, ${color[1]}, ${color[2]}";
   }

@@ -24,6 +24,7 @@ class RenderSystem extends System {
     // order of renderers specified here specifies draw order. first in first out -> last thing added gets drawn on top
     renderers = new Map<String, Renderer>();
     renderers['board'] = new BoardRenderer(canvas, context, world.globaldata['board']);
+    renderers['ui button'] = new UIButtonRenderer(canvas, context);
     renderers['api slot'] = new APISlotRenderer(canvas, context);
     renderers['api'] = new APIRenderer(canvas, context);
   }
