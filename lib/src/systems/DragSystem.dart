@@ -31,6 +31,13 @@ class DragSystem extends System {
     }
   }
 
+  void remove_entity(Entity e) {
+    if (current == e) {
+      current = null;
+    }
+    slots.remove(e);
+  }
+
   void handle_select(Map event) {
     Entity e = event['entity'];
     if (e.has_component(Draggable)) {
@@ -195,6 +202,7 @@ class DragSystem extends System {
       return false;
     }
   }
+
 }
 
 num distance(Entity e1, Entity e2) {

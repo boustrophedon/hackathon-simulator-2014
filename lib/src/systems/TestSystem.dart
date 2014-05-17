@@ -5,21 +5,14 @@ class TestSystem extends System {
     components_wanted = new Set.from([Position,]);
   }
   void initialize() {
-    Position pos = new Position(1,2);
-    Entity e = world.new_entity();
-    e.add_component(pos);
-    e.add_to_world();
-
-    world.subscribe_event('TestEvent', test_callback);
-    world.subscribe_event('TestEvent2', test_callback);
-    world.send_event('TestEvent2', {'test_attr': 'aoeu'});
+    world.subscribe_event("EntitySelected", handle_select);
   }
 
-  void test_callback(Map event) {
-    print(event['test_attr']);
-    print(event['EVENT_TYPE']);
+  void handle_select(Map event) {
+    print(event['entity'].get_component(Kind).kind);
+    world.remove_entity(event['entity']);
   }
 
-  void process_entity(Entity entity) {
-  }
+  void process_entity(Entity entity) {}
+  void remove_entity(Entity e) {}
 }

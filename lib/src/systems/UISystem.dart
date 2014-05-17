@@ -36,9 +36,13 @@ class UISystem extends System {
     if (kind.kind == 'ui button') {
       UIButton button = e.get_component(UIButton);
       world.send_event("ButtonPressed", {"action":button.action});
+      world.globaldata['selected'] = null;
+      // i don't really want to do this because i'd prefer each piece of globaldata
+      // to be writable by only one system
+      // oh well
     }
   }
 
   void process_entity(Entity e) {}
-
+  void remove_entity(Entity e) {}
 }

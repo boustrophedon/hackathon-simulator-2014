@@ -3,12 +3,12 @@ part of hacksim;
 class Renderer {
   CanvasElement canvas;
   CanvasRenderingContext2D context;
-  List<Entity> entities;
+  Set<Entity> entities;
 
   Renderer(CanvasElement canv, CanvasRenderingContext2D ctx) {
     canvas = canv;
     context = ctx;
-    entities = new List<Entity>();
+    entities = new Set<Entity>();
   }
 
   // not necessary for me now but would be nice to have in the future
@@ -30,6 +30,10 @@ class Renderer {
 
   void add_entity(Entity e) {
     entities.add(e);
+  }
+
+  void remove_entity(Entity e) {
+    entities.remove(e);
   }
 
   void render_entity(Entity e) {}

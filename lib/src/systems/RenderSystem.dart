@@ -43,5 +43,12 @@ class RenderSystem extends System {
       renderers[kind.kind].add_entity(entity);
     }
   }
+
+  void remove_entity(Entity entity) {
+    Kind kind = entity.get_component(Kind);
+    if (renderers.containsKey(kind.kind)) {
+      renderers[kind.kind].remove_entity(entity);
+    }
+  }
 }
 

@@ -12,4 +12,14 @@ class APISlotSystem extends System {
   void initialize() {}
 
   void process_entity(Entity e) {}
+
+  void remove_entity(Entity e) {
+    if (e.get_component(Kind).kind == 'api slot') {
+      APISlot sl = e.get_component(APISlot);
+      if (sl.api_inside != null) {
+        sl.api_inside.get_component(API).current_apislot = null;
+        sl.api_inside = null;
+      }
+    }
+  }
 }

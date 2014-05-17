@@ -103,6 +103,13 @@ class PickingSystem extends System {
 
   }
 
+  void remove_entity(Entity e) {
+    if (e.has_component(Selection)) {
+      id_map.remove(e.get_component(Selection).id);
+      picking_renderer.remove_entity(e);
+    }
+  }
+
   void process_entity(Entity e) {}
 
 }

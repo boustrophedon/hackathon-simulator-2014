@@ -108,5 +108,5 @@ class InputSystem extends System {
   }
 
   void process_entity(Entity entity) {}
-
+  void remove_entity(Entity e) {}
 }

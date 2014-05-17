@@ -13,5 +13,13 @@ class APISystem extends System {
   }
 
   void process_entity(Entity e) {}
-
+  void remove_entity(Entity e) {
+    if (e.get_component(Kind).kind == 'api') {
+      API a = e.get_component(API);
+      if (a.current_apislot != null) {
+        a.current_apislot.get_component(APISlot).api_inside = null;
+        a.current_apislot = null;
+      }
+    }
+  }
 }

@@ -44,4 +44,5 @@ class BoardSystem extends System {
   }
 
   void process_entity(Entity e) {}
+  void remove_entity(Entity e) {}
 }
