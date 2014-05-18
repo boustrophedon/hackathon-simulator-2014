@@ -1,7 +1,7 @@
 part of hacksim;
 
-class PickingRenderer extends Renderer {
-  PickingRenderer(CanvasElement canv, CanvasRenderingContext2D ctx) : super(canv, ctx) {
+class RectPickingRenderer extends Renderer {
+  RectPickingRenderer(CanvasElement canv, CanvasRenderingContext2D ctx) : super(canv, ctx) {
     context.fillStyle = '#000000';
     context.clearRect(0,0,canvas.width,canvas.height); 
   }

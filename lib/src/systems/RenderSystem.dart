@@ -11,18 +11,22 @@ class RenderSystem extends System {
   LinkedHashMap<String, Renderer> renderers;
 
   RenderSystem(World world) : super(world) {
+    renderers = new Map<String, Renderer>();
     components_wanted = new Set.from([Position,Size]);
   }
 
-  void initialize() {
-    canvas = world.globaldata['canvas'];
+  void set_context(CanvasElement canv) {
+    this.canvas = canv;
 
     context = canvas.context2D;
     screen_width = canvas.width;
     screen_height = canvas.height;
+  }
+
+  void initialize() {
+    set_context(world.globaldata['canvas']);
 
     // order of renderers specified here specifies draw order. first in first out -> last thing added gets drawn on top
-    renderers = new Map<String, Renderer>();
     renderers['board'] = new BoardRenderer(canvas, context, world.globaldata['board']);
     renderers['ui button'] = new UIButtonRenderer(canvas, context);
     renderers['api slot'] = new APISlotRenderer(canvas, context);
@@ -31,10 +35,15 @@ class RenderSystem extends System {
 
   void process() {
     context.clearRect(0, 0, screen_width, screen_height);
+    render_entities();
+  }
+
+  void render_entities() {
     for (Renderer r in renderers.values) {
       r.render_entities();
     }
   }
+
   void process_entity(Entity e) {}
 
   void process_new_entity(Entity entity) {

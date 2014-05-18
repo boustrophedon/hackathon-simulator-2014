@@ -23,7 +23,7 @@ part 'src/systems/MoneySystem.dart';
 part 'src/renderers/Renderer.dart';
 part 'src/renderers/APIRenderer.dart';
 part 'src/renderers/APISlotRenderer.dart';
-part 'src/renderers/PickingRenderer.dart';
+part 'src/renderers/RectPickingRenderer.dart';
 part 'src/renderers/BoardRenderer.dart';
 part 'src/renderers/UIButtonRenderer.dart';
 

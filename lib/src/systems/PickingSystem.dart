@@ -1,14 +1,6 @@
 part of hacksim;
 
-class PickingSystem extends System {
-  CanvasElement p_canvas;
-  CanvasRenderingContext2D p_context;
-
-  PickingRenderer picking_renderer;
-
-  int width;
-  int height;
-
+class PickingSystem extends RenderSystem {
   Map<int, Entity> id_map;
 
   int cur_id = 10;
@@ -26,14 +18,15 @@ class PickingSystem extends System {
 
   void initialize() {
     CanvasElement g_can = world.globaldata['canvas'];
-    width = g_can.width;
-    height = g_can.height;
 
-    p_canvas = new CanvasElement(width: width, height: height);
+    CanvasElement p_canvas = new CanvasElement(width: g_can.width, height: g_can.height);
     p_canvas.id = "picking";
-    p_context = p_canvas.context2D;
 
-    picking_renderer = new PickingRenderer(p_canvas, p_context);
+    set_context(p_canvas);
+
+    renderers['ui button'] = new RectPickingRenderer(canvas, context);
+    renderers['api slot'] = new RectPickingRenderer(canvas, context);
+    renderers['api'] = new RectPickingRenderer(canvas, context);
   }
 
   void handle_click(Map event) {
@@ -62,27 +55,25 @@ class PickingSystem extends System {
   }
 
   void pick_from_canvas(int x, int y) {
-    ImageData data = p_context.getImageData(x,y,1,1);
+    ImageData data = context.getImageData(x,y,1,1);
     var arr = data.data;
     num id = arr[0]*65536 + arr[1]*256 + arr[2];
     Entity e = id_map[id];
-    if (e!=null) {
-      if (world.globaldata['selected'] == e) {
-        deselect_current();
-      }
-      else {
+
+    if (world.globaldata['selected'] != null) {
+      deselect_current();
+    }
+    else {
+      if (e != null) {
         select_current(e, x, y);
       }
-    }
-    else if (world.globaldata['selected'] != null) {
-      deselect_current();
     }
   }
 
   void render_picking_canvas() {
-    p_context.clearRect(0,0,width,height);
-
-    picking_renderer.render_entities();
+    // i guess i could just call super.process() here but that is a bit opaque
+    context.clearRect(0,0,screen_width,screen_height);
+    render_entities();
   }
 
   void process_new_entity(Entity e) {
@@ -99,14 +90,14 @@ class PickingSystem extends System {
       }
     }
 
-    picking_renderer.add_entity(e);
+    super.process_new_entity(e);
 
   }
 
   void remove_entity(Entity e) {
     if (e.has_component(Selection)) {
       id_map.remove(e.get_component(Selection).id);
-      picking_renderer.remove_entity(e);
+      super.remove_entity(e);
     }
   }
 
