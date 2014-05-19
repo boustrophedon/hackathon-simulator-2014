@@ -66,14 +66,15 @@ class DragSystem extends System {
 
     API api_c = api.get_component(API);
     if (api_c.current_apislot != null) {
-      APISlot slot = api_c.current_apislot.get_component(APISlot);
-      slot.api_inside = null;
+      api_c.current_apislot.get_component(APISlot).api_inside = null;
+      api_c.current_apislot = null;
     }
   }
   void pickup_apislot(Map event, Entity apislot) {
     APISlot slot = apislot.get_component(APISlot);
     if (slot.api_inside != null) {
       current = slot.api_inside;
+      slot.api_inside.get_component(API).current_apislot = null;
       slot.api_inside = null;
       set_offsets(event['x'],event['y'], current.get_component(Position));
     }
@@ -183,14 +184,6 @@ class DragSystem extends System {
     Position pos = e.get_component(Position);
     Size size = e.get_component(Size);
     Board board = world.globaldata['board'];
-    //if ((pos.x >= board.hack_area.left) && (pos.y+size.height <= board.hack_area.bottom)) {
-    //  if ((x-xoffset <= board.hack_area.left) || (y-yoffset+size.height >= board.hack_area.bottom)) { // new position is outside
-    //    return true;
-    //  }
-    //  else {
-    //    return false;
-    //  }
-    //}
 
     if ((pos.x >= board.hack_area.left) && (x-xoffset <= board.hack_area.left)) {
       return true;
