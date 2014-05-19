@@ -85,7 +85,7 @@ class DragSystem extends System {
   }
 
   void handle_deselect(Map event) {
-    Entity e = event['entity'];
+    Entity e = current;
     if (e.has_component(Draggable)) {
       Kind kind = e.get_component(Kind);
       if (kind.kind == "api") {
