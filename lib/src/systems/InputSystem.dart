@@ -70,19 +70,19 @@ class InputSystem extends System {
     world.send_event('TouchEnd', {'TouchEvent':e});
   }
 
-  void register_keydown(KeyEvent e) {
-    world.send_event('KeyDown', {'KeyEvent':e});
+  void register_keydown(KeyboardEvent e) {
+    world.send_event('KeyDown', {'KeyboardEvent':e});
   }
-  void register_keyup(KeyEvent e) {
-    world.send_event('KeyUp', {'KeyEvent':e});
+  void register_keyup(KeyboardEvent e) {
+    world.send_event('KeyUp', {'KeyboardEvent':e});
   }
 
   // These are called inside process events "inside" the gameloop
   void handle_keydown(Map event) {
-    KeyEvent e = event['KeyEvent'];
+    KeyboardEvent e = event['KeyboardEvent'];
   }
   void handle_keyup(Map event) {
-    KeyEvent e = event['KeyEvent'];
+    KeyboardEvent e = event['KeyboardEvent'];
   }
 
   // so it turns out the offsetLeft and offsetTop things are kind of odd but do what they say in the sense that
