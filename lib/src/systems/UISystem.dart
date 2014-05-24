@@ -14,10 +14,15 @@ class UISystem extends System {
   void initialize() {
     Board board = world.globaldata['board'];
 
+    // XXX these are semi-hardcoded and bad. how2responsive design?
     int x = board.ui_area.left + 50;
     int y = board.ui_area.top + 50;
     create_button(x,y, "Buy API Key", "BUY_API");
     create_button(x+button_width+(button_width~/2),y, "Buy API Slot", "BUY_SLOT");
+
+    x = board.ui_area.right - 50;
+    y = board.ui_area.top + 50;
+    create_label(x, y, "Money: {0}", ()=>([world.globaldata['money'],]));
   }
 
   void create_button(int x, int y, String text, String action) {
@@ -26,8 +31,21 @@ class UISystem extends System {
     b.add_component(new Size(button_width,button_height));
     b.add_component(new Position(x, y));
     b.add_component(new Selection());
+    b.add_component(new UI()); 
     b.add_component(new UIButton(text, [0,0,0], [0,0,0], 22, action)); // hardcoded font size is bad
     b.add_to_world();
+  }
+
+  // update is a function that returns a list of items to be substituted into the text
+  // in order
+  void create_label(int x, int y, String text, Function update) {
+    Entity l = world.new_entity();
+    l.add_component(new Kind('ui label'));
+    l.add_component(new Size(button_width, button_height)); // what should this even be? we can't really know ahead of time.
+    l.add_component(new Position(x, y));
+    l.add_component(new UI()); 
+    l.add_component(new UILabel(text, update, [0,0,0], 22)); // again hardcoded font size
+    l.add_to_world();
   }
 
   void handle_selection(Map event) {

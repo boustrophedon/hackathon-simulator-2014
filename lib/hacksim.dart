@@ -11,6 +11,7 @@ part 'src/components.dart';
 part 'src/systems/TestSystem.dart';
 part 'src/systems/InputSystem.dart';
 part 'src/systems/RenderSystem.dart';
+part 'src/systems/UIRenderSystem.dart';
 part 'src/systems/EntityLoadSystem.dart';
 part 'src/systems/PickingSystem.dart';
 part 'src/systems/DragSystem.dart';
@@ -26,11 +27,13 @@ part 'src/renderers/APISlotRenderer.dart';
 part 'src/renderers/RectPickingRenderer.dart';
 part 'src/renderers/BoardRenderer.dart';
 part 'src/renderers/UIButtonRenderer.dart';
+part 'src/renderers/UILabelRenderer.dart';
 
 World create_world() {
   World world = new World();
   world.register_system(new BoardSystem(world));
   world.register_system(new RenderSystem(world));
+  world.register_system(new UIRenderSystem(world));
   world.register_system(new InputSystem(world));
   world.register_system(new PickingSystem(world));
   world.register_system(new DragSystem(world));

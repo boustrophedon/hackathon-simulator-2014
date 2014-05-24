@@ -49,6 +49,10 @@ class APISlot implements Component {
   }
 }
 
+class UI implements Component {
+  UI();
+}
+
 class UIButton implements Component {
   String text;
   List<int> font_color;
@@ -57,7 +61,7 @@ class UIButton implements Component {
   String border_color_string;
   String font;
   String action;
-  UIButton(String text, List<int> font_color, List<int> border_color, int fontsize, String action) {
+  UIButton(String text, List<int> font_color, List<int> border_color, int font_size, String action) {
     this.text = text;
  
     this.font_color = font_color;
@@ -66,8 +70,27 @@ class UIButton implements Component {
     this.border_color = border_color;
     this.border_color_string = "${border_color[0]}, ${border_color[1]}, ${border_color[2]}";
 
-    this.font = "${fontsize}pt Comic Sans"; //lel
+    this.font = "${font_size}pt Comic Sans"; //lel
 
     this.action = action; // I don't really like action going with all the style stuff, but I don't really want to give it its own component either
+  }
+}
+
+// should probably combine a lot of the stuff below and above and move it into the UI component
+
+class UILabel implements Component {
+  String text;
+  Function update;
+  List<int> font_color;
+  String font_color_string;
+  String font;
+  UILabel(String text, Function update, List<int> font_color, int font_size) {
+    this.text = text;
+    this.font_color = font_color;
+    this.font_color_string = "${font_color[0]}, ${font_color[1]}, ${font_color[2]}";
+
+    this.font = "${font_size}pt Comic Sans";
+
+    this.update = update;
   }
 }
