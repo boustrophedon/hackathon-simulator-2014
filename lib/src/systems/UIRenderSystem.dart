@@ -15,9 +15,26 @@ class UIRenderSystem extends RenderSystem {
 
   void process() {
     // no clearRect
+    for (Entity e in entities) {
+      process_entity(e);
+    }
     render_entities();
   }
 
-  void process_entity(Entity e) {}
+  void process_entity(Entity e) {
+    if (e.get_component(Kind).kind == 'ui label') {
+      update_label(e);
+    }
+  }
+
+  void update_label(Entity e) {
+    UILabel label = e.get_component(UILabel);
+
+    int i = 0;
+    for (String s in label.update()) {
+      label.rendered_text = label.text.replaceAll("{$i}", s);
+      i++;
+    }
+  }
 
 }

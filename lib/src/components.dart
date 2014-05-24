@@ -80,12 +80,14 @@ class UIButton implements Component {
 
 class UILabel implements Component {
   String text;
+  String rendered_text;
   Function update;
   List<int> font_color;
   String font_color_string;
   String font;
   UILabel(String text, Function update, List<int> font_color, int font_size) {
     this.text = text;
+    this.rendered_text = text;
     this.font_color = font_color;
     this.font_color_string = "${font_color[0]}, ${font_color[1]}, ${font_color[2]}";
 
