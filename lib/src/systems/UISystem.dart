@@ -31,8 +31,8 @@ class UISystem extends System {
     b.add_component(new Size(button_width,button_height));
     b.add_component(new Position(x, y));
     b.add_component(new Selection());
-    b.add_component(new UI()); 
-    b.add_component(new UIButton(text, [0,0,0], [0,0,0], 22, action)); // hardcoded font size is bad
+    b.add_component(new UI()); // default render parameters in component definition
+    b.add_component(new UIButton(text, action));
     b.add_to_world();
   }
 
@@ -46,7 +46,7 @@ class UISystem extends System {
     // to update the size of the text inside UILabelRenderer? or inside UIRenderSystem
     l.add_component(new Position(x, y));
     l.add_component(new UI()); 
-    l.add_component(new UILabel(text, update, [0,0,0], 22)); // again hardcoded font size
+    l.add_component(new UILabel(text, update));
     l.add_to_world();
   }
 

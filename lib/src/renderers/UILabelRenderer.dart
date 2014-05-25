@@ -6,9 +6,10 @@ class UILabelRenderer extends Renderer {
   void render_entity(Entity e) {
     Position pos = e.get_component(Position);
     UILabel label = e.get_component(UILabel);
+    UI ui = e.get_component(UI);
   
-    context.fillStyle = 'rgb(${label.font_color_string})';
-    context.font = label.font;
+    context.fillStyle = 'rgb(${ui.font_color_string})';
+    context.font = ui.font;
     context.fillText(label.rendered_text, pos.x, pos.y);
   }
 
