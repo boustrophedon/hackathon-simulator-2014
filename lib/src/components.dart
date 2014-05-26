@@ -31,10 +31,13 @@ class API implements Component {
   // and orientation I guess
   // and api name
   List<int> color;
+  String name;
+
   String color_string;
   Entity current_apislot = null;
-  API(List<int> col) {
-    color = col;
+  API(List<int> color, String name) {
+    this.color = color;
+    this.name = name;
     color_string = "${color[0]}, ${color[1]}, ${color[2]}";
   }
 }
