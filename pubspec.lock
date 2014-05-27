@@ -8,7 +8,7 @@ packages:
   entity_component:
     description:
       ref: null
-      resolved-ref: af6b85af915c5a7e3d0e185d6227965a1d217364
+      resolved-ref: "7fe36afefd0c0394309492cbcc09ab2dc1387c64"
       url: "git://github.com/boustrophedon/entity-component-dart.git"
     source: git
-    version: "0.2.2"
+    version: "0.3.0"
