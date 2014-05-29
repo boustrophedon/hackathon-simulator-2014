@@ -24,6 +24,10 @@ class PickingSystem extends RenderSystem {
 
     set_context(p_canvas);
 
+    // IDEA: give the selection components a Renderer field
+    // and then we just specify the kinds of entities we want in order (if/when z-buffer is added we don't even need to do this)
+    // and then in process_new_entity we instantiate the selection.renderer if renderers[e.get_component(Kind).kind] == null
+    // i.e. if there is no renderer for that kind instantiated
     renderers['ui button'] = new RectPickingRenderer(canvas, context);
     renderers['api slot'] = new RectPickingRenderer(canvas, context);
     renderers['api'] = new RectPickingRenderer(canvas, context);
