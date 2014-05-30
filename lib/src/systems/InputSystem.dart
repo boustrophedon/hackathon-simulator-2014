@@ -37,6 +37,11 @@ class InputSystem extends System {
   // These methods are called immediately when a click or keydown is registered, "outside of" the gameloop
   // They shouldn't change, since they just push input events onto the event queue. it's a bit pointless but it means that all input
   // from the same frame gets dealt with in the same loop rather than getting handled immediately
+
+
+  // so it turns out the offsetLeft and offsetTop things are kind of odd but do what they say in the sense that
+  // if you scroll down the page, they don't change; it's based on viewport, I guess?
+  // I think/it seems you can add window.scrollX and window.scrollY if you care
   void register_mousedown(MouseEvent e) {
     int x = e.client.x-canvas.offsetLeft; int y = e.client.y-canvas.offsetTop;
     world.send_event('MouseDown', {'MouseEvent':e,'x':x,'y':y});
@@ -85,9 +90,6 @@ class InputSystem extends System {
     KeyboardEvent e = event['KeyboardEvent'];
   }
 
-  // so it turns out the offsetLeft and offsetTop things are kind of odd but do what they say in the sense that
-  // if you scroll down the page, they don't change; it's based on viewport, I guess?
-  // I think/it seems you can add window.scrollX and window.scrollY if you care
   void handle_mousedown(Map event) {
     MouseEvent e = event['MouseEvent'];
   }

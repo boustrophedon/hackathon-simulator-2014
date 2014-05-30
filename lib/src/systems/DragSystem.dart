@@ -69,6 +69,8 @@ class DragSystem extends System {
       api_c.current_apislot.get_component(APISlot).api_inside = null;
       api_c.current_apislot = null;
     }
+
+    world.send_event("APIPickup", {'entity':current});
   }
   void pickup_apislot(Map event, Entity apislot) {
     APISlot slot = apislot.get_component(APISlot);
@@ -77,10 +79,14 @@ class DragSystem extends System {
       slot.api_inside.get_component(API).current_apislot = null;
       slot.api_inside = null;
       set_offsets(event['x'],event['y'], current.get_component(Position));
+
+      world.send_event("APIPickup", {'entity':current});
     }
     else {
       current = apislot;
       set_offsets(event['x'],event['y'], current.get_component(Position));
+
+      world.send_event("APISlotPickup", {'entity':current});
     }
   }
 
@@ -120,11 +126,15 @@ class DragSystem extends System {
         api_c.current_apislot = nearest;
       }
     }
-    current = null;  
+    current = null;
+
+    world.send_event("APIDrop", {'entity':api});
   }
 
   void drop_apislot(Map event, Entity apislot) {
     current = null;
+
+    world.send_event("APISlotDrop", {'entity':apislot});
   }
 
   Entity get_nearest_slot(Entity e) {

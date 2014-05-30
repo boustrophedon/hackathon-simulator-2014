@@ -91,6 +91,8 @@ class UIButton implements Component {
   }
 }
 
+// probably should typedef the update functions here. label_update and progress_update
+
 class UILabel implements Component {
   String text;
   String rendered_text;
@@ -98,6 +100,13 @@ class UILabel implements Component {
   UILabel(String text, Function update) {
     this.text = text;
     this.rendered_text = text;
+    this.update = update;
+  }
+}
+
+class UIProgressBar implements Component {
+  Function update;
+  UIProgressBar(Function update) {
     this.update = update;
   }
 }
