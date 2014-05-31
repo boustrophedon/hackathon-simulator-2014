@@ -11,6 +11,7 @@ class UIRenderSystem extends RenderSystem {
 
     renderers['ui button'] = new UIButtonRenderer(canvas, context);
     renderers['ui label'] = new UILabelRenderer(canvas, context);
+    renderers['ui progressbar'] = new UIProgressBarRenderer(canvas, context);
   }
 
   void process() {
@@ -22,8 +23,12 @@ class UIRenderSystem extends RenderSystem {
   }
 
   void process_entity(Entity e) {
-    if (e.get_component(Kind).kind == 'ui label') {
+    Kind kind = e.get_component(Kind);
+    if (kind.kind == 'ui label') {
       update_label(e);
+    }
+    else if (kind.kind == 'ui progressbar') {
+      update_bar(e);
     }
   }
 
@@ -37,4 +42,9 @@ class UIRenderSystem extends RenderSystem {
     }
   }
 
+  void update_bar(Entity e) {
+    UIProgressBar bar = e.get_component(UIProgressBar);
+
+    bar.progress = bar.update();
+  }
 }

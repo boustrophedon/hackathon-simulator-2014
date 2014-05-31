@@ -29,6 +29,7 @@ part 'src/renderers/RectPickingRenderer.dart';
 part 'src/renderers/BoardRenderer.dart';
 part 'src/renderers/UIButtonRenderer.dart';
 part 'src/renderers/UILabelRenderer.dart';
+part 'src/renderers/UIProgressBarRenderer.dart';
 
 World create_world() {
   World world = new World();

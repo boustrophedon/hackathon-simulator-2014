@@ -5,6 +5,9 @@ class UISystem extends System {
   int button_width = 200;
   int button_height = 100;
 
+  int bar_width = 500;
+  int bar_height = 50;
+
   UISystem(World world) : super(world) {
     components_wanted = null;
 
@@ -23,6 +26,10 @@ class UISystem extends System {
     x = board.ui_area.right - 300;
     y = board.ui_area.top + 50;
     create_label(x, y, "Money: {0}", ()=>([world.globaldata['money'].toString(),]));
+
+    x = board.hack_area.left + 500;
+    y = board.ui_area.top + 50;
+    create_progressbar(x, y, [0,0,0], ()=>(world.globaldata['PercentageCompleted']));
   }
 
   void create_button(int x, int y, String text, String action) {
@@ -48,6 +55,17 @@ class UISystem extends System {
     l.add_component(new UI()); 
     l.add_component(new UILabel(text, update));
     l.add_to_world();
+  }
+
+  // update is a function that returns the new percentage the progress bar should be filled to
+  void create_progressbar(int x, int y, List<int> color, Function update) {
+    Entity b = world.new_entity();
+    b.add_component(new Kind('ui progressbar'));
+    b.add_component(new Position(x,y));
+    b.add_component(new Size(bar_width, bar_height));
+    b.add_component(new UI(fill_color: color));
+    b.add_component(new UIProgressBar(update));
+    b.add_to_world();
   }
 
   void handle_selection(Map event) {

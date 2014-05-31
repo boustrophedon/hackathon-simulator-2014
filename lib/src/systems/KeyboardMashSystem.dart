@@ -16,6 +16,8 @@ class KeyboardMashSystem extends System {
     // nothing emits this event yet
     // after we submit the hack we need to increase the number of keystrokes to finish a hack
     world.subscribe_event('NewHackathonStart', handle_newstart);
+
+    world.globaldata['PercentageCompleted'] = 0;
   }
 
   void handle_keydown(Map event) {
@@ -25,7 +27,6 @@ class KeyboardMashSystem extends System {
     if (cur_keystrokes < keystrokes_to_complete) {
       cur_keystrokes+=1;
       update_percentage_done();
-      print(world.globaldata['PercentageCompleted']);
     }
     else if (cur_keystrokes == keystrokes_to_complete) { 
       world.send_event('HackReady',{});
@@ -34,12 +35,14 @@ class KeyboardMashSystem extends System {
 
   void handle_newstart(Map event) {
     cur_keystrokes = 0;
+    world.globaldata['PercentageCompleted'] = 0;
     keystrokes_to_complete = calculate_new_keystrokes(world.globaldata['hackathons_attended']);
   }
 
   void handle_reset(Map event) {
     if (cur_keystrokes > 0) {
       cur_keystrokes = 0;
+      world.globaldata['PercentageCompleted'] = 0;
       display_annoying_pivot_animation();
     }
   }

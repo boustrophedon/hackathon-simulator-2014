@@ -106,7 +106,9 @@ class UILabel implements Component {
 
 class UIProgressBar implements Component {
   Function update;
+  num progress;
   UIProgressBar(Function update) {
     this.update = update;
+    num progress;
   }
 }
