@@ -21,15 +21,18 @@ class UISystem extends System {
     int x = board.ui_area.left + 50;
     int y = board.ui_area.top + 50;
     create_button(x,y, "Buy API Key", "BUY_API");
-    create_button(x+button_width+(button_width~/2),y, "Buy API Slot", "BUY_SLOT");
+    create_button(x+button_width+(button_width~/4),y, "Buy API Slot", "BUY_SLOT");
 
     x = board.ui_area.right - 300;
     y = board.ui_area.top + 50;
     create_label(x, y, "Money: {0}", ()=>([world.globaldata['money'].toString(),]));
 
-    x = board.hack_area.left + 500;
-    y = board.ui_area.top + 50;
+    x = board.hack_area.left + 750;
+    y = board.ui_area.top + 30;
     create_progressbar(x, y, [0,0,0], ()=>(world.globaldata['PercentageCompleted']));
+
+    y = y+2*bar_height;
+    create_label(x, y, "Hack progress: {0}%", ()=>([(world.globaldata['PercentageCompleted']*100).round().toString(),]));
   }
 
   void create_button(int x, int y, String text, String action) {
