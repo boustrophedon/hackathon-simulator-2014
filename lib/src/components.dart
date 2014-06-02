@@ -84,8 +84,8 @@ class UI implements Component {
 
 class UIButton implements Component {
   String text;
-  String action;
-  UIButton(String text, String action) {
+  Function action;
+  UIButton(String text, Function action) {
     this.text = text;
     this.action = action;
   }

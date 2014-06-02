@@ -12,26 +12,17 @@ class MoneySystem extends System {
   void initialize() {
     world.globaldata['money'] = 100;
 
-    world.subscribe_event("ButtonPressed", handle_buttonpress);
+    world.subscribe_event("BuyAPI", handle_apibuy);
+    world.subscribe_event("BuyAPISlot", handle_apislotbuy);
   }
 
-  void handle_buttonpress(Map event) {
-    String action = event['action'];
-    if (action == "BUY_API") {
-      buy_api();
-    }
-    else if (action == "BUY_SLOT") {
-      buy_slot();
-    }
-  }
-
-  void buy_api() {
+  void handle_apibuy(Map event) {
     if (world.globaldata['money'] >= api_cost) {
       world.globaldata['money'] -= api_cost;
       world.send_event("SpawnEntity", {'kind':'api'});
     }
   }
-  void buy_slot() {
+  void handle_apislotbuy(Map event) {
     if (world.globaldata['money'] >= api_slot_cost) {
       world.globaldata['money'] -= api_slot_cost;
       world.send_event("SpawnEntity", {'kind':'api slot'});

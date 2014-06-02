@@ -20,8 +20,12 @@ class UISystem extends System {
     // XXX these are semi-hardcoded and bad. how2responsive design?
     int x = board.ui_area.left + 50;
     int y = board.ui_area.top + 50;
-    create_button(x,y, "Buy API Key", "BUY_API");
-    create_button(x+button_width+(button_width~/4),y, "Buy API Slot", "BUY_SLOT");
+    create_button(x, y, "Buy API Key", ()=>(world.send_event("BuyAPI", {})));
+    x = x+button_width+(button_width~/4);
+    create_button(x, y, "Buy API Slot", ()=>(world.send_event("BuyAPISlot", {})));
+
+    x = x+2*button_width;
+    create_button(x, y, "Submit Hack", ()=>(world.send_event("SubmitHack", {})));
 
     x = board.ui_area.right - 300;
     y = board.ui_area.top + 50;
@@ -76,7 +80,7 @@ class UISystem extends System {
     Kind kind = e.get_component(Kind);
     if (kind.kind == 'ui button') {
       UIButton button = e.get_component(UIButton);
-      world.send_event("ButtonPressed", {"action":button.action});
+      button.action();
       world.globaldata['selected'] = null;
       // i don't really want to do this because i'd prefer each piece of globaldata
       // to be writable by only one system
