@@ -31,6 +31,10 @@ class UISystem extends System {
     y = board.ui_area.top + 50;
     create_label(x, y, "Money: {0}", ()=>([world.globaldata['money'].toString(),]));
 
+    x = x - 100;
+    y = y + 120;
+    create_label(x, y, "Hackathons attended: {0}", ()=>([world.globaldata['HackathonsAttended'].toString(),]));
+
     x = board.hack_area.left + 750;
     y = board.ui_area.top + 30;
     create_progressbar(x, y, [0,0,0], ()=>(world.globaldata['PercentageCompleted']));
