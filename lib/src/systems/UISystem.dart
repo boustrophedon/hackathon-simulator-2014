@@ -39,7 +39,7 @@ class UISystem extends System {
     create_label(x, y, "Hack progress: {0}%", ()=>([(world.globaldata['PercentageCompleted']*100).round().toString(),]));
   }
 
-  void create_button(int x, int y, String text, String action) {
+  void create_button(int x, int y, String text, Function action) {
     Entity b = world.new_entity();
     b.add_component(new Kind('ui button'));
     b.add_component(new Size(button_width,button_height));

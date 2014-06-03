@@ -36,7 +36,7 @@ class KeyboardMashSystem extends System {
   void handle_newstart(Map event) {
     cur_keystrokes = 0;
     world.globaldata['PercentageCompleted'] = 0;
-    keystrokes_to_complete = calculate_new_keystrokes(world.globaldata['hackathons_attended']);
+    keystrokes_to_complete = calculate_new_keystrokes(world.globaldata['HackathonsAttended']);
   }
 
   void handle_reset(Map event) {
