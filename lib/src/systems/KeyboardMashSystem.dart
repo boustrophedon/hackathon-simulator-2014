@@ -3,10 +3,14 @@ part of hacksim;
 class KeyboardMashSystem extends System {
   int cur_keystrokes = 0;
   int keystrokes_to_complete; 
+  List<int> last_5_keys;
 
   KeyboardMashSystem(World world) : super(world) {
     components_wanted = null;
     keystrokes_to_complete = calculate_new_keystrokes(1);
+
+    last_5_keys = new List<int>(5);
+
   }
   void initialize() {
     world.subscribe_event('KeyDown', handle_keydown);
@@ -24,8 +28,13 @@ class KeyboardMashSystem extends System {
     // not used for anything currently, but could be.
     KeyboardEvent kbe = event['KeyboardEvent'];
 
-    if (cur_keystrokes < keystrokes_to_complete) {
+    if (last_5_keys.contains(kbe.keyCode)) {
+      return;
+    }
+
+    else if (cur_keystrokes < keystrokes_to_complete) {
       cur_keystrokes+=1;
+      last_5_keys[cur_keystrokes%5] = kbe.keyCode;
       update_percentage_done();
     }
     else if (cur_keystrokes == keystrokes_to_complete) { 
