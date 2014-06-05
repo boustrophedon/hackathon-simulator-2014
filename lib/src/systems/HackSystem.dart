@@ -1,8 +1,11 @@
 part of hacksim;
 
 class HackSystem extends System {
+  Random rng;
   HackSystem(World world) : super(world) {
     components_wanted = null;
+
+    rng = new math.Random();
   }
   
   void initialize() {
@@ -13,6 +16,7 @@ class HackSystem extends System {
 
   void handle_submit(Map event) {
     if (world.globaldata['PercentageCompleted'] == 1) {
+      world.globaldata['HackerCred'] += rng.nextInt(world.globaldata['HackathonsAttended']*10);
       world.globaldata['HackathonsAttended']+=1;
       world.send_event("NewHackathonStart", {});
     }

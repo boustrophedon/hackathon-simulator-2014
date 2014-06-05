@@ -22,6 +22,7 @@ part 'src/systems/BoardSystem.dart';
 part 'src/systems/MoneySystem.dart';
 part 'src/systems/KeyboardMashSystem.dart';
 part 'src/systems/HackSystem.dart';
+part 'src/systems/AdSystem.dart';
 
 part 'src/renderers/Renderer.dart';
 part 'src/renderers/APIRenderer.dart';
@@ -44,6 +45,7 @@ World create_world() {
   world.register_system(new APISlotSystem(world));
   world.register_system(new MoneySystem(world));
   world.register_system(new HackSystem(world));
+  world.register_system(new AdSystem(world));
   world.register_system(new KeyboardMashSystem(world));
   world.register_system(new UISystem(world));
   world.register_system(new EntityLoadSystem(world));

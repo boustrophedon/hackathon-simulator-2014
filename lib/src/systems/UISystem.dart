@@ -3,7 +3,7 @@ part of hacksim;
 class UISystem extends System {
   
   int button_width = 200;
-  int button_height = 100;
+  int button_height = 75;
 
   int bar_width = 500;
   int bar_height = 50;
@@ -24,23 +24,33 @@ class UISystem extends System {
     x = x+button_width+(button_width~/4);
     create_button(x, y, "Buy API Slot", ()=>(world.send_event("BuyAPISlot", {})));
 
-    x = x+2*button_width;
+    x = x+button_width+(button_width~/4);
     create_button(x, y, "Submit Hack", ()=>(world.send_event("SubmitHack", {})));
 
+    x = x+button_width+(button_width~/4);
+    create_button(x, y, "Serve Ads", ()=>(world.send_event("ServeAds", {})));
+
     x = board.ui_area.right - 300;
-    y = board.ui_area.top + 50;
+    y = board.ui_area.top + 40;
     create_label(x, y, "Money: {0}", ()=>([world.globaldata['money'].toString(),]));
 
-    x = x - 100;
-    y = y + 120;
-    create_label(x, y, "Hackathons attended: {0}", ()=>([world.globaldata['HackathonsAttended'].toString(),]));
+    x = board.ui_area.right - 300;
+    y = board.ui_area.top + 80;
+    create_label(x, y, "Hacker Cred: {0}", ()=>([world.globaldata['HackerCred'].toString(),]));
+
+    x = board.ui_area.right - 300;
+    y = board.ui_area.top + 120;
+    create_label(x, y, "Ads served: {0}", ()=>([world.globaldata['AdsServed'].toString(),]));
 
     x = board.hack_area.left + 750;
     y = board.ui_area.top + 30;
     create_progressbar(x, y, [0,0,0], ()=>(world.globaldata['PercentageCompleted']));
 
-    y = y+2*bar_height;
+    y = board.ui_area.top + 120;
     create_label(x, y, "Hack progress: {0}%", ()=>([(world.globaldata['PercentageCompleted']*100).round().toString(),]));
+
+    y = board.ui_area.top + 160;
+    create_label(x, y, "Hackathons attended: {0}", ()=>([world.globaldata['HackathonsAttended'].toString(),]));
   }
 
   void create_button(int x, int y, String text, Function action) {
