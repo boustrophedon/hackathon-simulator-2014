@@ -9,6 +9,10 @@ once you put the keys in the slots, you mash your keyboard as fast as possible t
 
 if you switch out apis after starting to mash the keyboard, it should display a big red flashing text that says "PIVOT!!11!1!" or something stupid
 
+you also have a time limit?
+and you should have to switch out your apis into different slots
+	inside apislot component add field for "stale"; update stale to true for all apislots found when submitting a hack (HackSystem) and set to false when picking an api out of an apislot
+
 while you are doing this, you get email spam from recruiters that you have to avoid. (choose right decline phrase from list)
 also, caffeine shake. you have to buy more caffeinated products to stop the pieces from shaking (since i can't make your mouse shake)
 
