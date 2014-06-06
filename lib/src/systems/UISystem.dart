@@ -28,7 +28,7 @@ class UISystem extends System {
     create_button(x, y, "Submit Hack", ()=>(world.send_event("SubmitHack", {})));
 
     x = x+button_width+(button_width~/4);
-    create_button(x, y, "Serve Ads", ()=>(world.send_event("ServeAds", {})));
+    create_button(x, y, "Serve More Ads", ()=>(world.send_event("ServeNewAds", {})));
 
     x = board.ui_area.right - 300;
     y = board.ui_area.top + 40;
