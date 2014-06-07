@@ -23,6 +23,8 @@ class InputSystem extends System {
     canvas.onTouchMove.listen(register_touchmove);
     window.onTouchEnd.listen(register_touchend);
 
+    window.onDeviceMotion.listen(register_devicemotion);
+
     world.subscribe_event('KeyDown', handle_keydown);
     world.subscribe_event('KeyUp', handle_keyup);
 
@@ -80,6 +82,10 @@ class InputSystem extends System {
   }
   void register_keyup(KeyboardEvent e) {
     world.send_event('KeyUp', {'KeyboardEvent':e});
+  }
+
+  void register_devicemotion(DeviceMotionEvent e) {
+    world.send_event('DeviceMotion', {'DeviceMotionEvent':e});
   }
 
   // These are called inside process events "inside" the gameloop
