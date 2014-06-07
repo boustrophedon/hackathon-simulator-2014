@@ -50,6 +50,7 @@ class EntityLoadSystem extends System {
     namepool.add("digital ocean");
     namepool.add("twilio");
     namepool.add("sendgrid");
+    namepool.add("mongodB"); // aeden
   }
 
   void handle_spawn(Map event) {
@@ -69,11 +70,11 @@ class EntityLoadSystem extends System {
   }
 
   List<int> color_from_colorpool() {
-    return colorpool[rng.nextInt(colorpool.length-1)];
+    return colorpool[rng.nextInt(colorpool.length)];
   }
 
   String name_from_namepool() {
-    return namepool[rng.nextInt(namepool.length-1)];
+    return namepool[rng.nextInt(namepool.length)];
   }
 
   void spawn_initial_apis() {
