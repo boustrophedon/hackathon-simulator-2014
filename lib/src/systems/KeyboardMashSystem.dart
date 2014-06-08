@@ -16,12 +16,7 @@ class KeyboardMashSystem extends System {
     world.subscribe_event('KeyDown', handle_keydown);
 
     world.subscribe_event('APIPickup', handle_reset);
-
-    // nothing emits this event yet
-    // after we submit the hack we need to increase the number of keystrokes to finish a hack
     world.subscribe_event('NewHackathonStart', handle_newstart);
-
-    world.globaldata['PercentageCompleted'] = 0;
   }
 
   void handle_keydown(Map event) {
@@ -31,7 +26,6 @@ class KeyboardMashSystem extends System {
     if (last_5_keys.contains(kbe.keyCode)) {
       return;
     }
-
     else if (cur_keystrokes < keystrokes_to_complete) {
       cur_keystrokes+=1;
       last_5_keys[cur_keystrokes%5] = kbe.keyCode;
@@ -44,16 +38,11 @@ class KeyboardMashSystem extends System {
 
   void handle_newstart(Map event) {
     cur_keystrokes = 0;
-    world.globaldata['PercentageCompleted'] = 0;
     keystrokes_to_complete = calculate_new_keystrokes(world.globaldata['HackathonsAttended']);
   }
 
   void handle_reset(Map event) {
-    if (cur_keystrokes > 0) {
-      cur_keystrokes = 0;
-      world.globaldata['PercentageCompleted'] = 0;
-      display_annoying_pivot_animation();
-    }
+    cur_keystrokes = 0;
   }
 
   void update_percentage_done() {
@@ -62,12 +51,6 @@ class KeyboardMashSystem extends System {
 
   int calculate_new_keystrokes(int level) {
     return 10*level + 50; // this is intentionally dumb (as is everything else about this project)
-  }
-
-  // doesn't do anything now. probably would need to add an animation system or something
-  // which i should probably do so I can learn how to do it.
-  void display_annoying_pivot_animation() {
-    print("PIVOT!!111one!!lol");
   }
 
   void process_entity(Entity e) {}

@@ -10,8 +10,10 @@ class HackSystem extends System {
   
   void initialize() {
     world.globaldata['HackathonsAttended'] = 1;
+    world.globaldata['PercentageCompleted'] = 0;
     world.globaldata['HackerCred'] = 0;
     world.subscribe_event("SubmitHack", handle_submit); 
+    world.subscribe_event("APIPickup", handle_reset); 
   }
 
   void handle_submit(Map event) {
@@ -23,9 +25,21 @@ class HackSystem extends System {
           world.globaldata['money'] += rng.nextInt(world.globaldata['AdsServed']*50);
         }
         world.globaldata['HackathonsAttended']+=1;
+        world.globaldata['PercentageCompleted'] = 0;
         world.send_event("NewHackathonStart", {});
       }
     }
+  }
+
+  void handle_reset(Map event) {
+    if (world.globaldata['PercentageCompleted'] > 0) {
+      world.globaldata['PercentageCompleted'] = 0;
+      display_annoying_pivot_animation(); 
+    }
+  }
+
+  void display_annoying_pivot_animation() {
+    // send event here to create an entity that is a label+has animation component
   }
 
   int apis_in_area() {

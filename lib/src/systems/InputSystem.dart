@@ -85,7 +85,13 @@ class InputSystem extends System {
   }
 
   void register_devicemotion(DeviceMotionEvent e) {
-    world.send_event('DeviceMotion', {'DeviceMotionEvent':e});
+    var a = e.acceleration;
+    if (a.x != null && a.y != null && a.z != null) {
+      num ss = math.sqrt(a.x*a.x + a.y*a.y + a.z*a.z);
+      if (ss > 5) { // only send acceleration event if it is significant. 5 is arbitrary
+        world.send_event('DeviceMotion', {'DeviceMotionEvent':e});
+      }
+    }
   }
 
   // These are called inside process events "inside" the gameloop
