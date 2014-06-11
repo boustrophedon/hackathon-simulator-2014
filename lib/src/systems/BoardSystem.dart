@@ -5,7 +5,9 @@ class Board {
   Rectangle ui_area;
   Rectangle hack_area;
 
-  Board(CanvasElement canvas) {
+  VideoElement background;
+
+  Board(CanvasElement canvas, VideoElement bg_video) {
     int width = canvas.width;
     int height = canvas.height;
 
@@ -27,6 +29,13 @@ class Board {
     purchase_area = new Rectangle.fromPoints(new Point(purchase_left, purchase_top), new Point(purchase_right, purchase_bottom));
     ui_area = new Rectangle.fromPoints(new Point(ui_left, ui_top), new Point(ui_right, ui_bottom));
     hack_area = new Rectangle.fromPoints(new Point(hack_left, hack_top), new Point(hack_right, hack_bottom));
+
+    background = bg_video;
+    background.width = hack_area.width;
+    background.height = hack_area.height;
+    background.autoplay = true;
+    background.loop = true;
+    background.play();
   }
 }
 
@@ -39,7 +48,8 @@ class BoardSystem extends System {
   }
 
   void initialize() {
-    board = new Board(world.globaldata['canvas']);
+    var loader = world.globaldata['video_assets'];
+    board = new Board(world.globaldata['canvas'], loader.videos['hackru']);
     world.globaldata['board'] = board;
   }
 

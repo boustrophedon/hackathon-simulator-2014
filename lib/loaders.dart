@@ -29,8 +29,6 @@ class ImageLoader {
   }
 }
 
-// so i couldn't figure out how to do the thing with the futures that i did with the images.
-// onLoad, onCanPlay, and onLoadedData all seemed to not work.
 class VideoLoader {
   Map<String, VideoElement> videos;
 
@@ -46,7 +44,14 @@ class VideoLoader {
       // set size and when to play when actually used in canvas
 
       videos[name] = new_video;
+
+      futures.add(new_video.onCanPlay.first);
     }
-    on_completion();
+    if (futures.isNotEmpty) {
+      Future.wait(futures).then((e) => on_completion());
+    }
+    else {
+      on_completion();
+    }
   }
 }

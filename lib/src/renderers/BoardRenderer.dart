@@ -21,6 +21,8 @@ class BoardRenderer extends Renderer {
     context.lineTo(board.ui_area.right, board.ui_area.top);
     context.stroke();
 
+    context.drawImage(board.background, board.hack_area.left, board.hack_area.top);
+
     //context.fillRect(board.purchase_area.left, board.purchase_area.top, board.purchase_area.width, board.purchase_area.height);
     //context.fillRect(board.hack_area.left, board.hack_area.top, board.hack_area.width, board.hack_area.height);
     //context.fillRect(board.ui_area.left, board.ui_area.top, board.ui_area.width, board.ui_area.height);
