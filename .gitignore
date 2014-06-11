@@ -13,3 +13,6 @@ pubspec.lock
 *.js_
 *.js.deps
 *.js.map
+
+# also blobs in media directory probably shouldn't be in git
+web/media/
