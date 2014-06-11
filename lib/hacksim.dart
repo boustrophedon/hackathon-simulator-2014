@@ -1,15 +1,12 @@
 library hacksim;
 
 import 'dart:html';
-import 'dart:async';
 import 'dart:math' as math;
 import 'dart:collection';
 
 import 'package:entity_component/entity_component.dart';
 
 part 'src/components.dart';
-
-part 'loaders.dart';
 
 part 'src/systems/TestSystem.dart';
 part 'src/systems/InputSystem.dart';
