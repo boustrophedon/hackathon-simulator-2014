@@ -10,7 +10,7 @@ class BoardRenderer extends Renderer {
   }
 
   void render_entities() {
-    context.strokeStyle = 'rgb(0,0,0)';
+    context.strokeStyle = 'rgba(0,0,0,1)';
     context.beginPath();
     context.moveTo(board.purchase_area.right, 0);
     context.lineTo(board.purchase_area.right, board.purchase_area.bottom);

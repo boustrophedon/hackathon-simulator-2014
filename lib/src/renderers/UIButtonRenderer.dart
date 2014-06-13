@@ -20,12 +20,12 @@ class UIButtonRenderer extends Renderer {
     UIButton button = e.get_component(UIButton);
     UI ui = e.get_component(UI);
 
-    context.strokeStyle = 'rgb(${ui.border_color_string})';
+    context.strokeStyle = 'rgba(${ui.border_color_string})';
 
     draw_rounded_rect(context, pos.x, pos.y, size.width, size.height, 20); // radius of 20 is arbitrary for now
     context.stroke();
 
-    context.fillStyle = 'rgb(${ui.font_color_string})';
+    context.fillStyle = 'rgba(${ui.font_color_string})';
     context.font = ui.font;
     int xoffset = (context.measureText("${button.text}").width)~/2;
     int yoffset = size.height~/2;

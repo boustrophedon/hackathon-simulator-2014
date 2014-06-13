@@ -8,7 +8,7 @@ class APIRenderer extends Renderer {
     Size size = e.get_component(Size);
     API api = e.get_component(API);
 
-    context.fillStyle = 'rgb(${api.color_string})';
+    context.fillStyle = 'rgba(${api.color_string})';
     context.fillRect(pos.x, pos.y, size.width, size.height);
 
     // this is a hack but whatever

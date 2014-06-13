@@ -8,11 +8,9 @@ class APISlotRenderer extends Renderer {
     Size size = e.get_component(Size);
     APISlot slot = e.get_component(APISlot);
 
-    context.fillStyle = 'rgb(${slot.color_string})';
-    context.fillRect(pos.x, pos.y, size.width, size.height);
-
-    context.fillStyle = 'rgb(255,255,255)';
-    context.fillRect(pos.x+10, pos.y+10, size.width-20, size.height-20);
+    context.strokeStyle = 'rgba(${slot.color_string})';
+    context.lineWidth = 10;
+    context.strokeRect(pos.x+5, pos.y+5, size.width-10, size.height-10);
 
   }
 } 

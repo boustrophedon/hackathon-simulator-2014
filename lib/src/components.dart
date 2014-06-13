@@ -38,7 +38,7 @@ class API implements Component {
   API(List<int> color, String name) {
     this.color = color;
     this.name = name;
-    color_string = "${color[0]}, ${color[1]}, ${color[2]}";
+    color_string = "${color[0]}, ${color[1]}, ${color[2]}, 1";
   }
 }
 
@@ -48,7 +48,7 @@ class APISlot implements Component {
   String color_string;
   APISlot(List<int> col) {
     color = col;
-    color_string = "${color[0]}, ${color[1]}, ${color[2]}";
+    color_string = "${color[0]}, ${color[1]}, ${color[2]}, 1";
   }
 }
 
@@ -66,15 +66,15 @@ class UI implements Component {
      String type_face: "Comic Sans", int font_size: 22}) {
     if (font_color == null) { font_color = [0,0,0]; }
     this.font_color = font_color;
-    this.font_color_string = "${font_color[0]}, ${font_color[1]}, ${font_color[2]}";
+    this.font_color_string = "${font_color[0]}, ${font_color[1]}, ${font_color[2]}, 1";
 
     if (border_color == null) { border_color = [0,0,0]; }
     this.border_color = border_color;
-    this.border_color_string = "${border_color[0]}, ${border_color[1]}, ${border_color[2]}";
+    this.border_color_string = "${border_color[0]}, ${border_color[1]}, ${border_color[2]}, 1";
 
     if (fill_color == null) { fill_color = [255,255,255]; }
     this.fill_color = fill_color;
-    this.fill_color_string = "${fill_color[0]}, ${fill_color[1]}, ${fill_color[2]}";
+    this.fill_color_string = "${fill_color[0]}, ${fill_color[1]}, ${fill_color[2]}, 1";
 
     this.font_size = font_size;
     this.type_face = type_face;

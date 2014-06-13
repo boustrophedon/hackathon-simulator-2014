@@ -9,10 +9,10 @@ class UIProgressBarRenderer extends Renderer {
     UI ui = e.get_component(UI);
     UIProgressBar bar = e.get_component(UIProgressBar);
 
-    context.strokeStyle = 'rgb(${ui.border_color_string})';
+    context.strokeStyle = 'rgba(${ui.border_color_string})';
     context.strokeRect(pos.x, pos.y, size.width, size.height);
 
-    context.fillStyle = 'rgb(${ui.fill_color_string})';
+    context.fillStyle = 'rgba(${ui.fill_color_string})';
     context.fillRect(pos.x, pos.y, (size.width*bar.progress), size.height);
   }
 }
