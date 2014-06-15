@@ -21,11 +21,12 @@ class BoardRenderer extends Renderer {
     context.lineTo(board.ui_area.right, board.ui_area.top);
     context.stroke();
 
-    board.vcontext.drawImage(board.background, 0, 0);
-    context.drawImage(board.vcanvas, board.hack_area.left, board.hack_area.top);
+    var ha = board.hack_area;
 
-    //context.fillRect(board.purchase_area.left, board.purchase_area.top, board.purchase_area.width, board.purchase_area.height);
-    //context.fillRect(board.hack_area.left, board.hack_area.top, board.hack_area.width, board.hack_area.height);
-    //context.fillRect(board.ui_area.left, board.ui_area.top, board.ui_area.width, board.ui_area.height);
+    context.fillStyle = 'rgba(0,0,0,1)';
+    context.fillRect(ha.left, ha.top, ha.width, ha.height);
+
+    board.vcontext.drawImage(board.background, 0, 0);
+    context.drawImage(board.vcanvas, ha.left, ha.top);
   }
 }

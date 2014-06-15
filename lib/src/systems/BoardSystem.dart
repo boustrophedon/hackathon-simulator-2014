@@ -40,7 +40,7 @@ class Board {
     background.loop = true;
     background.play();
 
-    vcanvas = new CanvasElement(width: (hack_area.width), height:(hack_area.height);
+    vcanvas = new CanvasElement(width: (hack_area.width), height:(hack_area.height));
     vcontext = vcanvas.context2D;
   }
 }
