@@ -22,11 +22,6 @@ class BoardRenderer extends Renderer {
     context.stroke();
 
     var ha = board.hack_area;
-
-    context.fillStyle = 'rgba(0,0,0,1)';
-    context.fillRect(ha.left, ha.top, ha.width, ha.height);
-
-    board.vcontext.drawImage(board.background, 0, 0);
-    context.drawImage(board.vcanvas, ha.left+(ha.width~/2)-(board.vcanvas.width~/2), ha.top+(ha.height~/2)-(board.vcanvas.height~/2));
+    context.drawImageScaled(board.background, ha.left, ha.top, ha.width, ha.height);
   }
 }
