@@ -7,6 +7,9 @@ class Board {
 
   VideoElement background;
 
+  CanvasElement vcanvas;
+  CanvasRenderingContext2D vcontext;
+
   Board(CanvasElement canvas, VideoElement bg_video) {
     int width = canvas.width;
     int height = canvas.height;
@@ -36,6 +39,9 @@ class Board {
     background.autoplay = true;
     background.loop = true;
     background.play();
+
+    vcanvas = new CanvasElement(width: (hack_area.width), height:(hack_area.height);
+    vcontext = vcanvas.context2D;
   }
 }
 
