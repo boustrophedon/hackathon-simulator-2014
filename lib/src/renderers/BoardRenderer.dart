@@ -27,6 +27,6 @@ class BoardRenderer extends Renderer {
     context.fillRect(ha.left, ha.top, ha.width, ha.height);
 
     board.vcontext.drawImage(board.background, 0, 0);
-    context.drawImage(board.vcanvas, ha.left, ha.top);
+    context.drawImage(board.vcanvas, ha.left+(ha.width~/2)-(board.vcanvas.width~/2), ha.top+(ha.height~/2)-(board.vcanvas.height~/2));
   }
 }

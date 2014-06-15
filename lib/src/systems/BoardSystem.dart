@@ -34,13 +34,11 @@ class Board {
     hack_area = new Rectangle.fromPoints(new Point(hack_left, hack_top), new Point(hack_right, hack_bottom));
 
     background = bg_video;
-    background.width = hack_area.width;
-    background.height = hack_area.height;
     background.autoplay = true;
     background.loop = true;
     background.play();
 
-    vcanvas = new CanvasElement(width: (hack_area.width), height:(hack_area.height));
+    vcanvas = new CanvasElement(width: (background.videoWidth), height:(background.videoHeight));
     vcontext = vcanvas.context2D;
   }
 }
