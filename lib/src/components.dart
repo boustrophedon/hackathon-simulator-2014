@@ -117,6 +117,7 @@ class Board implements Component {
   Rectangle purchase_area;
   Rectangle ui_area;
   Rectangle hack_area;
+  Rectangle board_area;
 
   VideoElement background;
 
@@ -142,6 +143,8 @@ class Board implements Component {
     purchase_area = new Rectangle.fromPoints(new Point(purchase_left, purchase_top), new Point(purchase_right, purchase_bottom));
     ui_area = new Rectangle.fromPoints(new Point(ui_left, ui_top), new Point(ui_right, ui_bottom));
     hack_area = new Rectangle.fromPoints(new Point(hack_left, hack_top), new Point(hack_right, hack_bottom));
+
+    board_area = canvas.getBoundingClientRect(); // #getrekt
 
     background = bg_video;
     background.autoplay = true;

@@ -4,6 +4,8 @@ import 'dart:html';
 import 'dart:math' as math;
 import 'dart:collection';
 
+import 'dart:async';
+
 import 'package:entity_component/entity_component.dart';
 
 part 'src/components.dart';
@@ -24,6 +26,7 @@ part 'src/systems/MoneySystem.dart';
 part 'src/systems/KeyboardMashSystem.dart';
 part 'src/systems/DeviceShakeSystem.dart';
 part 'src/systems/HackSystem.dart';
+part 'src/systems/CaffeineSystem.dart';
 part 'src/systems/AdSystem.dart';
 
 part 'src/renderers/Renderer.dart';
@@ -48,6 +51,7 @@ World create_world() {
   world.register_system(new APISlotSystem(world));
   world.register_system(new MoneySystem(world));
   world.register_system(new HackSystem(world));
+  world.register_system(new CaffeineSystem(world));
   world.register_system(new AdSystem(world));
   world.register_system(new KeyboardMashSystem(world));
   world.register_system(new DeviceShakeSystem(world));
