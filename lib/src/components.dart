@@ -64,15 +64,15 @@ class UI implements Component {
   int font_size;
   UI({List<int> font_color: null, List<int> border_color: null, List<int> fill_color: null,
      String type_face: "Comic Sans", int font_size: 22}) {
-    if (font_color == null) { font_color = [0,0,0]; }
+    if (font_color == null) { font_color = const [0,0,0]; }
     this.font_color = font_color;
     this.font_color_string = "${font_color[0]}, ${font_color[1]}, ${font_color[2]}, 1";
 
-    if (border_color == null) { border_color = [0,0,0]; }
+    if (border_color == null) { border_color = const [0,0,0]; }
     this.border_color = border_color;
     this.border_color_string = "${border_color[0]}, ${border_color[1]}, ${border_color[2]}, 1";
 
-    if (fill_color == null) { fill_color = [255,255,255]; }
+    if (fill_color == null) { fill_color = const [255,255,255]; }
     this.fill_color = fill_color;
     this.fill_color_string = "${fill_color[0]}, ${fill_color[1]}, ${fill_color[2]}, 1";
 
