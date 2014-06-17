@@ -11,6 +11,7 @@ part 'src/components.dart';
 part 'src/systems/TestSystem.dart';
 part 'src/systems/InputSystem.dart';
 part 'src/systems/RenderSystem.dart';
+part 'src/systems/BoardRenderSystem.dart';
 part 'src/systems/UIRenderSystem.dart';
 part 'src/systems/EntityLoadSystem.dart';
 part 'src/systems/PickingSystem.dart';
@@ -37,6 +38,7 @@ part 'src/renderers/UIProgressBarRenderer.dart';
 World create_world() {
   World world = new World();
   world.register_system(new BoardSystem(world));
+  world.register_system(new BoardRenderSystem(world));
   world.register_system(new RenderSystem(world));
   world.register_system(new UIRenderSystem(world));
   world.register_system(new InputSystem(world));

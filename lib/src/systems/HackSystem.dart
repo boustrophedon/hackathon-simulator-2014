@@ -43,7 +43,7 @@ class HackSystem extends System {
   }
 
   int apis_in_area() {
-    Rectangle hack_area = world.globaldata["board"].hack_area;
+    Rectangle hack_area = world.globaldata['board'].hack_area;
     int total = 0;
     for (Entity e in entities) {
       var pos = e.get_component(Position);

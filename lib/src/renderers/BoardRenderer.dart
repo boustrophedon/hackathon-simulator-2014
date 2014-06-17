@@ -1,12 +1,13 @@
 part of hacksim;
 
 class BoardRenderer extends Renderer {
-  // i'm not sure if i want this class to hold the APIRenderer and APISlotRenderers and then call render entities on them or not
-  // because it's using the render_entities method even though it's not actually rendering any entities.
+
   Board board;
 
-  BoardRenderer(CanvasElement canv, CanvasRenderingContext2D ctx, Board bd) : super(canv, ctx) {
-     board = bd;
+  BoardRenderer(CanvasElement canv, CanvasRenderingContext2D ctx) : super(canv, ctx) {}
+
+  void add_entity(Entity e) {
+    board = e.get_component(Board);
   }
 
   void render_entities() {
