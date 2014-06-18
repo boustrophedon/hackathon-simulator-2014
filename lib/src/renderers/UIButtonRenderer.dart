@@ -30,6 +30,6 @@ class UIButtonRenderer extends Renderer {
     int xoffset = (context.measureText("${button.text}").width)~/2;
     int yoffset = size.height~/2;
 
-    context.fillText(button.text, pos.x+(size.width~/2)-xoffset, pos.y+size.height-yoffset);
+    context.fillText(button.text, pos.x+(size.width~/2)-xoffset, pos.y+yoffset+(ui.font_size~/4));
   }
 } 

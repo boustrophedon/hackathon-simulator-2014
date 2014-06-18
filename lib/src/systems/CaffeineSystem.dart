@@ -19,7 +19,9 @@ class CaffeineSystem extends System {
     caffeine_max = amount_caffeine_needed(1);
     caffeine_level = caffeine_max;
 
-    world.subscribe_event("BuyCaffeine", handle_buy);
+    world.globaldata['CaffeinePercentage'] = 1;
+
+    world.subscribe_event("GetCaffeine", handle_more);
     world.subscribe_event("NewHackathonStart", handle_newstart);
   }
 
@@ -27,7 +29,7 @@ class CaffeineSystem extends System {
     caff_timer = new Timer.periodic(const Duration(seconds:1), (t)=>(caffeine_tick())); // there's probably a better way to do this
   }
 
-  void handle_buy(Map event) {
+  void handle_more(Map event) {
     int level = world.globaldata['HackathonsAttended'];
     caffeine_level += (1/level) *amount_caffeine_needed(level); // less each time
     update_caffeine_status();
@@ -35,23 +37,25 @@ class CaffeineSystem extends System {
 
   void handle_newstart(Map event) {
     caffeine_max = amount_caffeine_needed(world.globaldata['HackathonsAttended']);
-    caffeine_level = caffeine_max;
+    update_caffeine_status();
   }
 
   int amount_caffeine_needed(int level) {
-    return 50 + level*20;
+    return (200 + level*20);
   }
- 
+
   // I really feel like I should do this in process() with an accumulator but I'm not keeping track of the world's dt.
   void caffeine_tick() {
     caffeine_level -= (2*world.globaldata['HackathonsAttended']);
     update_caffeine_status();
-    if (caffeine_level <= -10) {
-      world.send_event("You lose!", {"reason": "Caffeine widthrawal."});
+    if (caffeine_level <= -(0.1*caffeine_max)) {
+      world.send_event("YouLose", {"reason": "Caffeine widthrawal."});
+      caff_timer.cancel();
     }
   }
 
   void update_caffeine_status() {
+    world.globaldata['CaffeinePercentage'] = (caffeine_level/caffeine_max);
     if (is_critical(caffeine_level)) {
       status = CRITICAL;
     }

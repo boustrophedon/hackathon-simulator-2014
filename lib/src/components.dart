@@ -63,7 +63,7 @@ class UI implements Component {
   String type_face;
   int font_size;
   UI({List<int> font_color: null, List<int> border_color: null, List<int> fill_color: null,
-     String type_face: "Comic Sans", int font_size: 22}) {
+     String type_face: "Comic Sans", int font_size: 18}) {
     if (font_color == null) { font_color = const [0,0,0]; }
     this.font_color = font_color;
     this.font_color_string = "${font_color[0]}, ${font_color[1]}, ${font_color[2]}, 1";
@@ -128,7 +128,7 @@ class Board implements Component {
     int purchase_top = 0;
     int purchase_left = 0;
     int purchase_right = (width*0.16).toInt();
-    int purchase_bottom = (height*0.8).toInt();
+    int purchase_bottom = (height*0.75).toInt();
 
     int ui_top = purchase_bottom;
     int ui_left = 0;
