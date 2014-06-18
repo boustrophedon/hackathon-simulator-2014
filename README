@@ -1,1 +1,10 @@
 Hackathon Simulator 2014. This was supposed to be my HackRU spring 2014 hack but I ended up not really doing much because I spent too much time trying other things. I did end up writing the entity component system for dart that I longed for in my heart during HackRU, so that is good. 
+
+Instructions:
+Drag and drop the api keys (squares) into the slots (squares with holes), putting them on top of the video.
+
+Then, mash the keyboard to complete your hack.
+
+Once it is completed, push the Submit Hack button and receive Hacker Cred. The more hacker cred you have, the more ads you can serve, which gain you money each time you create a new hack.
+
+If the caffeine meter gets below certain points, bad things happen. Ingesting too much caffeine is also bad for you.
