@@ -9,9 +9,9 @@ class CaffeineSystem extends System {
   math.Random rng = new math.Random();
 
   int status = 0;
-  static const int CRITICAL = 6;
+  static const int CRITICAL = 3;
   static const int BAD = 2;
-  static const int OVER = 16;
+  static const int OVER = 9;
 
   CaffeineSystem(World world) : super(world) {
     components_wanted = new Set.from([Draggable,]); // only want things that we can move back
@@ -77,14 +77,12 @@ class CaffeineSystem extends System {
     Position pos = e.get_component(Position);
     Rectangle board = world.globaldata['board'].board_area;
 
-    num x,y;
     if (status != 0) {
-
-      // I'm not really sure why but somehow this has a bias to move upwards and to the left
-      // It should just restrict them to the range [-range/2, range/2] though.
-      // if I switch pos.x+y to pos.x-x and such they move to the bottom corner. strange.
-      x = rng.nextInt(status) - status~/2;
-      y = rng.nextInt(status) - status~/2;
+      // i should make the apis pop out when they shake
+      num x = rng.nextInt(status);
+      num y = rng.nextInt(status);
+      x = (rng.nextBool()) ? x : -x;
+      y = (rng.nextBool()) ? y : -y;
       if (board.containsPoint(new Point(pos.x+x, pos.y+y))) {
         pos.x += x;
         pos.y += y;
