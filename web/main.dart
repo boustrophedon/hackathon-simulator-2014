@@ -9,8 +9,8 @@ void main() {
 
   CanvasElement canvas = querySelector('#area');
   // make the canvas the full size of the window
-  canvas.height = 1080;
-  canvas.width = 1920;
+  canvas.height = window.innerHeight;
+  canvas.width = window.innerWidth;
   
   w.globaldata['canvas'] = canvas;
 
