@@ -27,9 +27,6 @@ class Draggable implements Component {
 }
 
 class API implements Component {
-  // need some sort of shape data here
-  // and orientation I guess
-  // and api name
   List<int> color;
   String name;
 

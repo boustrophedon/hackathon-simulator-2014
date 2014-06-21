@@ -5,9 +5,13 @@ class Renderer {
   CanvasRenderingContext2D context;
   Set<Entity> entities;
 
+  num sx,sy;
+
   Renderer(CanvasElement canv, CanvasRenderingContext2D ctx) {
     canvas = canv;
     context = ctx;
+    sx = canvas.width/1920;
+    sy = canvas.height/1080;
     entities = new Set<Entity>();
   }
 
@@ -15,6 +19,7 @@ class Renderer {
   // and super easy to implement here and now while i'm at it.
   void setup() {
     context.save();
+    context.scale(sx,sy);
   }
   void teardown() {
     context.restore();
