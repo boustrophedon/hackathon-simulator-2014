@@ -9,7 +9,7 @@ class APIRenderer extends Renderer {
     API api = e.get_component(API);
 
     context.fillStyle = 'rgba(${api.color_string})';
-    context.fillRect(pos.x, pos.y, size.width, size.height);
+    context.drawImageScaled(api.img, pos.x, pos.y, size.width, size.height);
 
     // this is a hack but whatever
     // i guess i could create like a uilabel but i didn't really design them to be mobile

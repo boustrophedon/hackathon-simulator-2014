@@ -84,6 +84,8 @@ class EntityLoadSystem extends System {
   }
 
   void spawn_api() {
+    var loader = world.globaldata['image_assets'];
+
     int spacing = 20; int offset = 10; int per_row = 5;
     int x = (api_spawn_index%per_row)*(api_size+spacing)+offset;
     int y = (api_spawn_index~/per_row)*(api_size+2*spacing)+offset;
@@ -94,7 +96,7 @@ class EntityLoadSystem extends System {
     e.add_component(new Position(x,y));
     e.add_component(new Selection());
     e.add_component(new Draggable());
-    e.add_component(new API(color_from_colorpool(), name_from_namepool()));
+    e.add_component(new API(color_from_colorpool(), name_from_namepool(), loader.images['russfrank']));
     e.add_to_world();
 
     api_spawn_index = (api_spawn_index+1)%15;

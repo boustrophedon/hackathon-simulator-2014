@@ -70,7 +70,7 @@ class CaffeineSystem extends System {
     }
   }
   bool is_critical(num c) => ( (c<0.1*caffeine_max) ? true : false); 
-  bool is_bad(num c) => ( (c<0.5*caffeine_max) ? true : false); 
+  bool is_bad(num c) => ( (c<0.4*caffeine_max) ? true : false); 
   bool is_overcharged(num c) => ( (c>caffeine_max) ? true : false); 
 
   void process_entity(Entity e) {

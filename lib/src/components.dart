@@ -27,17 +27,17 @@ class Draggable implements Component {
 }
 
 class API implements Component {
-  // need some sort of shape data here
-  // and orientation I guess
-  // and api name
   List<int> color;
   String name;
+  
+  ImageElement img;
 
   String color_string;
   Entity current_apislot = null;
-  API(List<int> color, String name) {
+  API(List<int> color, String name, ImageElement img) {
     this.color = color;
     this.name = name;
+    this.img = img;
     color_string = "${color[0]}, ${color[1]}, ${color[2]}, 1";
   }
 }
