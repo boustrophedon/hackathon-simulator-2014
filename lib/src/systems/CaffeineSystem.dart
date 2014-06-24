@@ -42,12 +42,12 @@ class CaffeineSystem extends System {
   }
 
   int amount_caffeine_needed(int level) {
-    return (200 + level*20);
+    return (level*20);
   }
 
   // I really feel like I should do this in process() with an accumulator but I'm not keeping track of the world's dt.
   void caffeine_tick() {
-    caffeine_level -= (2*world.globaldata['HackathonsAttended']);
+    caffeine_level -= (2*world.globaldata['HackathonsAttended']/10);
     update_caffeine_status();
     if (caffeine_level <= -(0.1*caffeine_max)) {
       world.send_event("YouLose", {"reason": "Caffeine widthrawal."});

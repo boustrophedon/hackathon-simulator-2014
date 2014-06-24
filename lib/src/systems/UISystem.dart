@@ -55,7 +55,7 @@ class UISystem extends System {
     create_progressbar(x, y, [0,0,0], ()=>(world.globaldata['PercentageCompleted']));
     
     y = board.ui_area.top + 40;
-    create_label(x, y, "Caffeine: {0}mg", ()=>([world.globaldata['CaffeineLevel'].toString(),]));
+    create_label(x, y, "Caffeine: {0}mg", ()=>([world.globaldata['CaffeineLevel'].round().toString(),]));
 
     y = board.ui_area.top + 160;
     create_label(x, y, "Hack progress: {0}%", ()=>([(world.globaldata['PercentageCompleted']*100).round().toString(),]));
