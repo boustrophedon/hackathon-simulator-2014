@@ -20,6 +20,7 @@ class CaffeineSystem extends System {
     caffeine_level = caffeine_max;
 
     world.globaldata['CaffeinePercentage'] = 1;
+    world.globaldata['CaffeineLevel'] = caffeine_level;
 
     world.subscribe_event("GetCaffeine", handle_more);
     world.subscribe_event("NewHackathonStart", handle_newstart);
@@ -56,6 +57,7 @@ class CaffeineSystem extends System {
 
   void update_caffeine_status() {
     world.globaldata['CaffeinePercentage'] = (caffeine_level/caffeine_max);
+    world.globaldata['CaffeineLevel'] = caffeine_level;
     if (is_critical(caffeine_level)) {
       status = CRITICAL;
     }
