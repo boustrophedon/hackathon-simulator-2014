@@ -10,6 +10,17 @@ class APISystem extends System {
   }
 
   void initialize() {
+    world.subscribe_event("APIPickup", handle_pickup);
+  }
+
+  void handle_pickup(Map event) {
+    var api = event['entity'];
+
+    API api_c = api.get_component(API);
+    if (api_c.current_apislot != null) {
+      api_c.current_apislot.get_component(APISlot).api_inside = null;
+      api_c.current_apislot = null;
+    }   
   }
 
   void process_entity(Entity e) {}

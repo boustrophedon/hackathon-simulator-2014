@@ -41,16 +41,16 @@ class DragSystem extends System {
   void handle_select(Map event) {
     Entity e = event['entity'];
     if (e.has_component(Draggable)) {
+      current = e;
+      set_offsets(event['x'], event['y'], current.get_component(Position));
+
       Kind kind = e.get_component(Kind);
       if (kind.kind == 'api') {
-        pickup_api(event, e);
+        world.send_event("APIPickup", {'entity':current});
       }
       else if (kind.kind == 'api slot') {
+        world.send_event("APISlotPickup", {'entity':current});
         pickup_apislot(event, e);
-      }
-      else {
-        current = e;
-        set_offsets(event['x'], event['y'], current.get_component(Position));
       }
     }
   }
@@ -60,24 +60,10 @@ class DragSystem extends System {
     yoffset = y - pos.y;
   }
 
-  void pickup_api(Map event, Entity api) {
-    current = api;
-    set_offsets(event['x'],event['y'], current.get_component(Position));
-
-    API api_c = api.get_component(API);
-    if (api_c.current_apislot != null) {
-      api_c.current_apislot.get_component(APISlot).api_inside = null;
-      api_c.current_apislot = null;
-    }
-
-    world.send_event("APIPickup", {'entity':current});
-  }
   void pickup_apislot(Map event, Entity apislot) {
     APISlot slot = apislot.get_component(APISlot);
     if (slot.api_inside != null) {
       current = slot.api_inside;
-      slot.api_inside.get_component(API).current_apislot = null;
-      slot.api_inside = null;
       set_offsets(event['x'],event['y'], current.get_component(Position));
 
       world.send_event("APIPickup", {'entity':current});
@@ -85,8 +71,6 @@ class DragSystem extends System {
     else {
       current = apislot;
       set_offsets(event['x'],event['y'], current.get_component(Position));
-
-      world.send_event("APISlotPickup", {'entity':current});
     }
   }
 
