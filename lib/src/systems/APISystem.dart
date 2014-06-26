@@ -12,6 +12,7 @@ class APISystem extends System {
   void initialize() {
     world.subscribe_event("APIPickup", handle_pickup);
     world.subscribe_event("APIDrop", handle_drop);
+    world.subscribe_event("APIMove", handle_move);
   }
 
   void handle_pickup(Map event) {
@@ -41,6 +42,14 @@ class APISystem extends System {
         api_c.current_apislot = nearest;
       }
     }
+  }
+
+  void handle_move(Map event) {
+    var e = event['entity'];
+    var x = event['x']; var y = event['y'];
+    Position pos = e.get_component(Position);
+    pos.x = x;
+    pos.y = y;
   }
 
   void process_entity(Entity e) {}

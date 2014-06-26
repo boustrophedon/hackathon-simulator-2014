@@ -105,42 +105,28 @@ class DragSystem extends System {
 
   void handle_move(Map event) {
     if (current != null) {
-      Kind kind = current.get_component(Kind);
-      if (kind.kind == "api") {
-        move_api(current, event['x'], event['y']);
+      var x = event['x']-xoffset; var y = event['y']-yoffset;
+
+      if (!check_bounds(current, x, y)) {
+        Kind kind = current.get_component(Kind);
+        if (kind.kind == "api") {
+          world.send_event("APIMove", {'entity':current,'x':x,'y':y});
+        }
+        else if (kind.kind == "api slot") {
+          world.send_event("APISlotMove", {'entity':current,'x':x,'y':y});
+        }
+        else {
+          move_other(current, x, y);
+        }
       }
-      else if (kind.kind == "api slot") {
-        move_api_slot(current, event['x'], event['y']);
-      }
-      else {
-        move_other(current, event['x'], event['y']);
-      }
+      else { print('bad move');}
     }
   }
 
   void move_other(Entity e, int x, int y) {
     Position pos = e.get_component(Position);
-    pos.x = x - xoffset;
-    pos.y = y - yoffset;
-  }
-
-  // these are separate because initially i wanted apis to snap into api slots as they were moving
-  void move_api(Entity e, int x, int y) {
-    if (check_bounds(e, x, y)) {
-      return;
-    }
-    Position pos = e.get_component(Position);
-    pos.x = x - xoffset;
-    pos.y = y - yoffset;
-  }
-  
-  void move_api_slot(Entity e, int x, int y) {
-    if (check_bounds(e, x, y)) {
-      return;
-    }
-    Position pos = e.get_component(Position);
-    pos.x = x - xoffset;
-    pos.y = y - yoffset;
+    pos.x = x;
+    pos.y = y;
   }
 
   bool check_bounds(Entity e, int x, int y) {
@@ -148,10 +134,10 @@ class DragSystem extends System {
     Size size = e.get_component(Size);
     Board board = world.globaldata['board'];
 
-    if ((pos.x >= board.hack_area.left) && (x-xoffset <= board.hack_area.left)) {
+    if ((pos.x >= board.hack_area.left) && (x <= board.hack_area.left)) {
       return true;
     }
-    else if ((pos.y+size.height <= board.hack_area.bottom) && (y-yoffset+size.height >= board.hack_area.bottom)) {
+    else if ((pos.y+size.height <= board.hack_area.bottom) && (y+size.height >= board.hack_area.bottom)) {
       return true;
     }
     else {
