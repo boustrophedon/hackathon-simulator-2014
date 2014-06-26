@@ -11,6 +11,7 @@ class APISystem extends System {
 
   void initialize() {
     world.subscribe_event("APIPickup", handle_pickup);
+    world.subscribe_event("APIDrop", handle_drop);
   }
 
   void handle_pickup(Map event) {
@@ -21,6 +22,25 @@ class APISystem extends System {
       api_c.current_apislot.get_component(APISlot).api_inside = null;
       api_c.current_apislot = null;
     }   
+  }
+
+  void handle_drop(Map event) {
+    var api = event['entity'];
+    var nearest = event['nearest_slot'];
+    if (nearest != null) {
+      APISlot slot = nearest.get_component(APISlot);
+
+      if (slot.api_inside == null) { // if there's not already an api inside
+        API api_c = api.get_component(API);
+        Position slotpos = nearest.get_component(Position);
+        Position apipos = api.get_component(Position);
+
+        apipos.x = slotpos.x+10;
+        apipos.y = slotpos.y+10;
+        slot.api_inside = api;
+        api_c.current_apislot = nearest;
+      }
+    }
   }
 
   void process_entity(Entity e) {}

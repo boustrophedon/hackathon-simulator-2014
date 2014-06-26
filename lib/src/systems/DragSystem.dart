@@ -77,48 +77,17 @@ class DragSystem extends System {
   void handle_deselect(Map event) {
     Entity e = current;
     if (e.has_component(Draggable)) {
+      current = null;
+
       Kind kind = e.get_component(Kind);
       if (kind.kind == "api") {
-        drop_api(event, e);
+        var nearest = get_nearest_slot(e);
+        world.send_event("APIDrop", {'entity':e,'nearest_slot':nearest});
       }
       else if (kind.kind == "api slot") {
-        drop_apislot(event, e);
-      }
-      else {
-        drop_other(event, e);
+        world.send_event("APISlotDrop", {'entity':e});
       }
     }
-  }
-
-  void drop_other(Map event, Entity e) {
-    current = null;
-  }
-
-  void drop_api(Map event, Entity api) {
-    Entity nearest = get_nearest_slot(api);
-    if (nearest != null) {
-      APISlot slot = nearest.get_component(APISlot);
-
-      if (slot.api_inside == null) { // if there's not already an api inside
-        API api_c = api.get_component(API);
-        Position slotpos = nearest.get_component(Position);
-        Position apipos = api.get_component(Position);
-
-        apipos.x = slotpos.x+10;
-        apipos.y = slotpos.y+10;
-        slot.api_inside = api;
-        api_c.current_apislot = nearest;
-      }
-    }
-    current = null;
-
-    world.send_event("APIDrop", {'entity':api});
-  }
-
-  void drop_apislot(Map event, Entity apislot) {
-    current = null;
-
-    world.send_event("APISlotDrop", {'entity':apislot});
   }
 
   Entity get_nearest_slot(Entity e) {
