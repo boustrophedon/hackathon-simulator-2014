@@ -80,7 +80,6 @@ class CaffeineSystem extends System {
     Rectangle board = world.globaldata['board'].board_area;
 
     if (status != 0) {
-      // i should make the apis pop out when they shake
       num x = rng.nextInt(status);
       num y = rng.nextInt(status);
       x = (rng.nextBool()) ? x : -x;
@@ -88,6 +87,10 @@ class CaffeineSystem extends System {
       if (board.containsPoint(new Point(pos.x+x, pos.y+y))) {
         pos.x += x;
         pos.y += y;
+        
+        if (e.get_component(Kind).kind == 'api') {
+          world.send_event("APIPickup", {'entity':e});
+        }
       }
     }
   }

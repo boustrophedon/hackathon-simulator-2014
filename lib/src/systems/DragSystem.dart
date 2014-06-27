@@ -41,16 +41,16 @@ class DragSystem extends System {
   void handle_select(Map event) {
     Entity e = event['entity'];
     if (e.has_component(Draggable)) {
+      current = e;
+      set_offsets(event['x'], event['y'], current.get_component(Position));
+
       Kind kind = e.get_component(Kind);
       if (kind.kind == 'api') {
-        pickup_api(event, e);
+        world.send_event("APIPickup", {'entity':current});
       }
       else if (kind.kind == 'api slot') {
+        world.send_event("APISlotPickup", {'entity':current});
         pickup_apislot(event, e);
-      }
-      else {
-        current = e;
-        set_offsets(event['x'], event['y'], current.get_component(Position));
       }
     }
   }
@@ -60,24 +60,10 @@ class DragSystem extends System {
     yoffset = y - pos.y;
   }
 
-  void pickup_api(Map event, Entity api) {
-    current = api;
-    set_offsets(event['x'],event['y'], current.get_component(Position));
-
-    API api_c = api.get_component(API);
-    if (api_c.current_apislot != null) {
-      api_c.current_apislot.get_component(APISlot).api_inside = null;
-      api_c.current_apislot = null;
-    }
-
-    world.send_event("APIPickup", {'entity':current});
-  }
   void pickup_apislot(Map event, Entity apislot) {
     APISlot slot = apislot.get_component(APISlot);
     if (slot.api_inside != null) {
       current = slot.api_inside;
-      slot.api_inside.get_component(API).current_apislot = null;
-      slot.api_inside = null;
       set_offsets(event['x'],event['y'], current.get_component(Position));
 
       world.send_event("APIPickup", {'entity':current});
@@ -85,56 +71,23 @@ class DragSystem extends System {
     else {
       current = apislot;
       set_offsets(event['x'],event['y'], current.get_component(Position));
-
-      world.send_event("APISlotPickup", {'entity':current});
     }
   }
 
   void handle_deselect(Map event) {
     Entity e = current;
     if (e.has_component(Draggable)) {
+      current = null;
+
       Kind kind = e.get_component(Kind);
       if (kind.kind == "api") {
-        drop_api(event, e);
+        var nearest = get_nearest_slot(e);
+        world.send_event("APIDrop", {'entity':e,'nearest_slot':nearest});
       }
       else if (kind.kind == "api slot") {
-        drop_apislot(event, e);
-      }
-      else {
-        drop_other(event, e);
+        world.send_event("APISlotDrop", {'entity':e});
       }
     }
-  }
-
-  void drop_other(Map event, Entity e) {
-    current = null;
-  }
-
-  void drop_api(Map event, Entity api) {
-    Entity nearest = get_nearest_slot(api);
-    if (nearest != null) {
-      APISlot slot = nearest.get_component(APISlot);
-
-      if (slot.api_inside == null) { // if there's not already an api inside
-        API api_c = api.get_component(API);
-        Position slotpos = nearest.get_component(Position);
-        Position apipos = api.get_component(Position);
-
-        apipos.x = slotpos.x+10;
-        apipos.y = slotpos.y+10;
-        slot.api_inside = api;
-        api_c.current_apislot = nearest;
-      }
-    }
-    current = null;
-
-    world.send_event("APIDrop", {'entity':api});
-  }
-
-  void drop_apislot(Map event, Entity apislot) {
-    current = null;
-
-    world.send_event("APISlotDrop", {'entity':apislot});
   }
 
   Entity get_nearest_slot(Entity e) {
@@ -152,42 +105,28 @@ class DragSystem extends System {
 
   void handle_move(Map event) {
     if (current != null) {
-      Kind kind = current.get_component(Kind);
-      if (kind.kind == "api") {
-        move_api(current, event['x'], event['y']);
+      var x = event['x']-xoffset; var y = event['y']-yoffset;
+
+      if (!check_bounds(current, x, y)) {
+        Kind kind = current.get_component(Kind);
+        if (kind.kind == "api") {
+          world.send_event("APIMove", {'entity':current,'x':x,'y':y});
+        }
+        else if (kind.kind == "api slot") {
+          world.send_event("APISlotMove", {'entity':current,'x':x,'y':y});
+        }
+        else {
+          move_other(current, x, y);
+        }
       }
-      else if (kind.kind == "api slot") {
-        move_api_slot(current, event['x'], event['y']);
-      }
-      else {
-        move_other(current, event['x'], event['y']);
-      }
+      else { print('bad move');}
     }
   }
 
   void move_other(Entity e, int x, int y) {
     Position pos = e.get_component(Position);
-    pos.x = x - xoffset;
-    pos.y = y - yoffset;
-  }
-
-  // these are separate because initially i wanted apis to snap into api slots as they were moving
-  void move_api(Entity e, int x, int y) {
-    if (check_bounds(e, x, y)) {
-      return;
-    }
-    Position pos = e.get_component(Position);
-    pos.x = x - xoffset;
-    pos.y = y - yoffset;
-  }
-  
-  void move_api_slot(Entity e, int x, int y) {
-    if (check_bounds(e, x, y)) {
-      return;
-    }
-    Position pos = e.get_component(Position);
-    pos.x = x - xoffset;
-    pos.y = y - yoffset;
+    pos.x = x;
+    pos.y = y;
   }
 
   bool check_bounds(Entity e, int x, int y) {
@@ -195,10 +134,10 @@ class DragSystem extends System {
     Size size = e.get_component(Size);
     Board board = world.globaldata['board'];
 
-    if ((pos.x >= board.hack_area.left) && (x-xoffset <= board.hack_area.left)) {
+    if ((pos.x >= board.hack_area.left) && (x <= board.hack_area.left)) {
       return true;
     }
-    else if ((pos.y+size.height <= board.hack_area.bottom) && (y-yoffset+size.height >= board.hack_area.bottom)) {
+    else if ((pos.y+size.height <= board.hack_area.bottom) && (y+size.height >= board.hack_area.bottom)) {
       return true;
     }
     else {

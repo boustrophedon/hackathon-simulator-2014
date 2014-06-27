@@ -9,7 +9,22 @@ class APISlotSystem extends System {
     components_wanted = new Set.from([APISlot,]);
   }
   
-  void initialize() {}
+  void initialize() {
+    world.subscribe_event("APISlotPickup", handle_pickup);
+    world.subscribe_event("APISlotDrop", handle_drop);
+    world.subscribe_event("APISlotMove", handle_move);
+  }
+
+  void handle_pickup(Map event) {}
+  void handle_drop(Map event) {}
+  void handle_move(Map event) {
+    var e = event['entity'];
+    var x = event['x']; var y = event['y'];
+    Position pos = e.get_component(Position);
+    pos.x = x;
+    pos.y = y;
+  }
+
 
   void process_entity(Entity e) {}
 
