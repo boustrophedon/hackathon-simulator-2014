@@ -9,7 +9,7 @@ class UILabelRenderer extends Renderer {
     UI ui = e.get_component(UI);
   
     context.fillStyle = 'rgba(${ui.font_color_string})';
-    context.font = ui.font;
+    context.font = "${ui.font_size}pt ${ui.type_face}";
     context.fillText(label.rendered_text, pos.x, pos.y);
   }
 

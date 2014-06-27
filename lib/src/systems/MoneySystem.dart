@@ -24,13 +24,13 @@ class MoneySystem extends System {
   void handle_apibuy(Map event) {
     if (world.globaldata['money'] >= api_cost) {
       world.globaldata['money'] -= api_cost;
-      world.send_event("SpawnEntity", {'kind':'api'});
+      world.send_event("SpawnEntity", {'type':'api'});
     }
   }
   void handle_apislotbuy(Map event) {
     if (world.globaldata['money'] >= api_slot_cost) {
       world.globaldata['money'] -= api_slot_cost;
-      world.send_event("SpawnEntity", {'kind':'api slot'});
+      world.send_event("SpawnEntity", {'type':'api slot'});
     }
   }
 

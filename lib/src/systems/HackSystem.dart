@@ -39,7 +39,7 @@ class HackSystem extends System {
   }
 
   void display_annoying_pivot_animation() {
-    // send event here to create an entity that is a label+has animation component
+    world.send_event("SpawnEntity", {'type':'pivot label'}); 
   }
 
   int apis_in_area() {

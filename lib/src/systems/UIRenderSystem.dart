@@ -35,10 +35,15 @@ class UIRenderSystem extends RenderSystem {
   void update_label(Entity e) {
     UILabel label = e.get_component(UILabel);
 
-    int i = 0;
-    for (String s in label.update()) {
-      label.rendered_text = label.text.replaceAll("{$i}", s);
-      i++;
+    if (label.update == null) {
+      label.rendered_text = label.text;
+    }
+    else {
+      int i = 0;
+      for (String s in label.update()) {
+        label.rendered_text = label.text.replaceAll("{$i}", s);
+        i++;
+      }
     }
   }
 

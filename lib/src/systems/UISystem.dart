@@ -80,9 +80,6 @@ class UISystem extends System {
   void create_label(int x, int y, String text, Function update) {
     Entity l = world.new_entity();
     l.add_component(new Kind('ui label'));
-    l.add_component(new Size(button_width, button_height)); // what should this even be? we can't really know ahead of time.
-    // I guess for Size what we're going to have to do is render the text to a separate canvas and then use context.measureText
-    // to update the size of the text inside UILabelRenderer? or inside UIRenderSystem
     l.add_component(new Position(x, y));
     l.add_component(new UI()); 
     l.add_component(new UILabel(text, update));

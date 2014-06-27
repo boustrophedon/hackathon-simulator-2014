@@ -9,6 +9,7 @@ import 'dart:async';
 import 'package:entity_component/entity_component.dart';
 
 part 'src/components.dart';
+part 'src/animations.dart';
 
 part 'src/systems/TestSystem.dart';
 part 'src/systems/InputSystem.dart';
@@ -28,6 +29,7 @@ part 'src/systems/DeviceShakeSystem.dart';
 part 'src/systems/HackSystem.dart';
 part 'src/systems/CaffeineSystem.dart';
 part 'src/systems/AdSystem.dart';
+part 'src/systems/AnimationSystem.dart';
 
 part 'src/renderers/Renderer.dart';
 part 'src/renderers/APIRenderer.dart';
@@ -44,6 +46,7 @@ World create_world() {
   world.register_system(new BoardRenderSystem(world));
   world.register_system(new RenderSystem(world));
   world.register_system(new UIRenderSystem(world));
+  world.register_system(new AnimationSystem(world));
   world.register_system(new InputSystem(world));
   world.register_system(new PickingSystem(world));
   world.register_system(new DragSystem(world));

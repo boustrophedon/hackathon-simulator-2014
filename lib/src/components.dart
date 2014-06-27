@@ -59,7 +59,6 @@ class UI implements Component {
   String font_color_string;
   String border_color_string;
   String fill_color_string;
-  String font;
   String type_face;
   int font_size;
   UI({List<int> font_color: null, List<int> border_color: null, List<int> fill_color: null,
@@ -76,19 +75,15 @@ class UI implements Component {
     this.fill_color = fill_color;
     this.fill_color_string = "${fill_color[0]}, ${fill_color[1]}, ${fill_color[2]}, 1";
 
-    this.font_size = font_size;
     this.type_face = type_face;
-    this.font = "${font_size}pt $type_face";
+    this.font_size = font_size;
   }
 }
 
 class UIButton implements Component {
   String text;
   Function action;
-  UIButton(String text, Function action) {
-    this.text = text;
-    this.action = action;
-  }
+  UIButton(this.text, this.action);
 }
 
 // probably should typedef the update functions here. label_update and progress_update
@@ -106,14 +101,22 @@ class UILabel implements Component {
 
 class UIProgressBar implements Component {
   Function update;
-  num progress;
-  UIProgressBar(Function update) {
-    this.update = update;
-    num progress;
-  }
+  num progress = 0;
+  UIProgressBar(this.update);
+}
+
+class Animation implements Component {
+  Function update;
+  Function complete;
+  Duration duration;
+  num progress = 0;
+  Animation(this.update, this.complete, this.duration);
 }
 
 class Board implements Component {
+  int width;
+  int height;
+
   Rectangle purchase_area;
   Rectangle ui_area;
   Rectangle hack_area;
@@ -122,8 +125,8 @@ class Board implements Component {
   VideoElement background;
 
   Board(CanvasElement canvas, VideoElement bg_video) {
-    int width = canvas.width;
-    int height = canvas.height;
+    width = canvas.width;
+    height = canvas.height;
 
     int purchase_top = 0;
     int purchase_left = 0;

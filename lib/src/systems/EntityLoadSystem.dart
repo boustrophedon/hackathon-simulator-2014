@@ -24,6 +24,8 @@ class EntityLoadSystem extends System {
     spawn_map = new Map<String, Function>();
     spawn_map['api'] = spawn_api;
     spawn_map['api slot'] = spawn_api_slot;
+    spawn_map['pivot label'] = spawn_pivot_label; // this is kind of dumb
+    // or rather, the uilabel stuff should be here too
   }
 
   void initialize() {
@@ -54,7 +56,7 @@ class EntityLoadSystem extends System {
   }
 
   void handle_spawn(Map event) {
-    Function spawn_function = spawn_map[event['kind']];
+    Function spawn_function = spawn_map[event['type']];
     if (spawn_function != null) {
       spawn_function();
     }
@@ -123,6 +125,20 @@ class EntityLoadSystem extends System {
     e.add_to_world();
 
     slot_spawn_index = (slot_spawn_index+1)%9;
+  }
+
+  void spawn_pivot_label() {
+    Board board = world.globaldata['board'];
+    int x = rng.nextInt(board.width);
+    int y = rng.nextInt(board.height);
+
+    Entity e = world.new_entity();
+    e.add_component(new Kind('ui label'));
+    e.add_component(new Position(x,y));
+    e.add_component(new UI(font_size: 10, font_color: const [255,0,0]));
+    e.add_component(new UILabel("PIVOT!1!!!!11!", null));
+    e.add_component(new Animation(pivot_animation, null, const Duration(seconds: 2)));
+    e.add_to_world();
   }
 
   void process_entity(Entity entity) {}

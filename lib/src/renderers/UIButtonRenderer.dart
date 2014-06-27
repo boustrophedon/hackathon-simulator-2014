@@ -26,7 +26,7 @@ class UIButtonRenderer extends Renderer {
     context.stroke();
 
     context.fillStyle = 'rgba(${ui.font_color_string})';
-    context.font = ui.font;
+    context.font = "${ui.font_size}pt ${ui.type_face}";
     int xoffset = (context.measureText("${button.text}").width)~/2;
     int yoffset = size.height~/2;
 

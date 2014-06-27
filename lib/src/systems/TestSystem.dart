@@ -5,12 +5,6 @@ class TestSystem extends System {
     components_wanted = new Set.from([Position,]);
   }
   void initialize() {
-    world.subscribe_event("EntitySelected", handle_select);
-  }
-
-  void handle_select(Map event) {
-    print(event['entity'].get_component(Kind).kind);
-    world.remove_entity(event['entity']);
   }
 
   void process_entity(Entity entity) {}
