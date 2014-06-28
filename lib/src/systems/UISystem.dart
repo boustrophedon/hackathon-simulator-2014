@@ -64,7 +64,7 @@ class UISystem extends System {
     create_label(x, y, "Hackathons attended: {0}", ()=>([world.globaldata['HackathonsAttended'].toString(),]));
   }
 
-  void create_button(int x, int y, String text, Function action) {
+  void create_button(int x, int y, String text, ButtonActionFunction action) {
     Entity b = world.new_entity();
     b.add_component(new Kind('ui button'));
     b.add_component(new Size(button_width,button_height));
@@ -77,7 +77,7 @@ class UISystem extends System {
 
   // update is a function that returns a list of items to be substituted into the text
   // in order
-  void create_label(int x, int y, String text, Function update) {
+  void create_label(int x, int y, String text, LabelUpdateFunction update) {
     Entity l = world.new_entity();
     l.add_component(new Kind('ui label'));
     l.add_component(new Position(x, y));
@@ -87,7 +87,7 @@ class UISystem extends System {
   }
 
   // update is a function that returns the new percentage the progress bar should be filled to
-  void create_progressbar(int x, int y, List<int> color, Function update) {
+  void create_progressbar(int x, int y, List<int> color, ProgressBarUpdateFunction update) {
     Entity b = world.new_entity();
     b.add_component(new Kind('ui progressbar'));
     b.add_component(new Position(x,y));

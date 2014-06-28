@@ -1,5 +1,11 @@
 part of hacksim;
 
+typedef List<String> LabelUpdateFunction();
+typedef void ButtonActionFunction();
+typedef num ProgressBarUpdateFunction();
+typedef void AnimationUpdateFunction(Entity e, num dt);
+typedef void AnimationCompleteFunction(Entity e, num dt);
+
 class Position implements Component {
   int x;
   int y;
@@ -82,7 +88,7 @@ class UI implements Component {
 
 class UIButton implements Component {
   String text;
-  Function action;
+  ButtonActionFunction action;
   UIButton(this.text, this.action);
 }
 
@@ -91,8 +97,8 @@ class UIButton implements Component {
 class UILabel implements Component {
   String text;
   String rendered_text;
-  Function update;
-  UILabel(String text, Function update) {
+  LabelUpdateFunction update;
+  UILabel(String text, LabelUpdateFunction update) {
     this.text = text;
     this.rendered_text = text;
     this.update = update;
@@ -100,14 +106,14 @@ class UILabel implements Component {
 }
 
 class UIProgressBar implements Component {
-  Function update;
+  ProgressBarUpdateFunction update;
   num progress = 0;
   UIProgressBar(this.update);
 }
 
 class Animation implements Component {
-  Function update;
-  Function complete;
+  AnimationUpdateFunction update;
+  AnimationCompleteFunction complete;
   Duration duration;
   num progress = 0;
   Animation(this.update, this.complete, this.duration);

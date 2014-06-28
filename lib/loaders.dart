@@ -4,11 +4,13 @@
 import 'dart:html';
 import 'dart:async';
 
+typedef void CompletionFunction();
+
 class ImageLoader {
   Map<String, ImageElement> images;
 
   // load is a map of 'asset name':'path to asset'
-  ImageLoader(Function on_completion, Map<String,String> load) {
+  ImageLoader(CompletionFunction on_completion, Map<String,String> load) {
     images = new Map<String, ImageElement>();
     var futures = new List<Future<Event>>();
 
@@ -33,7 +35,7 @@ class VideoLoader {
   Map<String, VideoElement> videos;
 
   // load is a map of 'asset name':'path to asset'
-  VideoLoader(Function on_completion, Map<String,String> load) {
+  VideoLoader(CompletionFunction on_completion, Map<String,String> load) {
     videos = new Map<String, VideoElement>();
     var futures = new List<Future<Event>>();
 
