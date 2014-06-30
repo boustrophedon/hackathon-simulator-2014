@@ -1,21 +1,21 @@
 you are at a hackathon
 you are pitched a bunch of apis and you get api keys that allow you to use them
-you can put these api keys together based on some attributes they have (like puzzle pieces only certain ones go together)
-	different api keys have different colors
 	you have x slots, which increase over time (can buy upgrades for more slots/more apis i guess)
 	put the keys in the slots
+	keys have russ frank's face on them. need to steal more profile pictures from facebook.
 
 once you put the keys in the slots, you mash your keyboard as fast as possible to make some hack progress bar go up
 	on mobile you should shake the tablet/phone. credit to aeden I think for this idea.
 
 if you switch out apis after starting to mash the keyboard, it should display a big red flashing text that says "PIVOT!!11!1!" or something stupid
 
-you also have a time limit?
 and you should have to switch out your apis into different slots
 	inside apislot component add field for "stale"; update stale to true for all apislots found when submitting a hack (HackSystem) and set to false when picking an api out of an apislot
 
 while you are doing this, you get email spam from recruiters that you have to avoid. (choose right decline phrase from list)
 also, caffeine shake. you have to buy more caffeinated products to stop the pieces from shaking (since i can't make your mouse shake)
+
+if you are having caffeine problems, you cannot make progress on your hack. you will constantly want to pivot to a new idea and be unable to focus. (this is actually a the result of a regression but I kind of like it)
 
 when you think you have a good app, you submit it to your hackathon. you gain hacker cred arbitrarily based on how much the crowd likes your app.
 depending on your hacker cred, you can serve your users ads, which gain you revenue, with which you can buy more api keys
