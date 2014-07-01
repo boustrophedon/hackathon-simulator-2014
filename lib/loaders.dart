@@ -35,13 +35,17 @@ class VideoLoader {
   Map<String, VideoElement> videos;
 
   // load is a map of 'asset name':'path to asset'
-  VideoLoader(CompletionFunction on_completion, Map<String,String> load) {
+  VideoLoader(CompletionFunction on_completion, Map<String,List<String>> load) {
     videos = new Map<String, VideoElement>();
     var futures = new List<Future<Event>>();
 
     for (String name in load.keys) {
       VideoElement new_video = new VideoElement();
-      new_video.src = load[name];
+      for (String src in load[name]) {
+        SourceElement ele = new SourceElement();
+        ele.src = src;
+        new_video.nodes.add(ele);
+      }
       new_video.autoplay = false;
       // set size and when to play when actually used in canvas
 

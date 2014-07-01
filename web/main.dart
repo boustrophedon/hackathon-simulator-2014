@@ -24,8 +24,8 @@ void load_assets_and_run(World w) {
   load_images(w);
 }
 void load_images(World w) {
-  w.globaldata['image_assets'] = new ImageLoader( ()=>(load_videos(w)), {'russfrank':'media/russfrank.png'});
+  w.globaldata['image_assets'] = new ImageLoader( ()=>(load_videos(w)), {'russfrank':'media/russfrank.png', 'swift':'media/swift.png', 'kaushal':'media/kaushal.png', 'eddiez':'media/eddiez.png', 'billy':'media/billy.jpg'});
 }
 void load_videos(World w) {
-  w.globaldata['video_assets'] = new VideoLoader( ()=>(w.run()), {'hackru':'media/hackru_site.webm'});
+  w.globaldata['video_assets'] = new VideoLoader( ()=>(w.run()), {'hackru':['media/hackru-site.mp4', 'media/hackru_site.webm']});
 }
