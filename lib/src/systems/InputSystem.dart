@@ -3,10 +3,21 @@ part of hacksim;
 class InputSystem extends System {
   CanvasElement canvas;
 
+  int display_height;
+  int display_width;
+
+  num xs;
+  num ys;
+
   InputSystem(World world) : super(world) { components_wanted = null; }
 
   void initialize() {
     canvas = world.globaldata['canvas'];
+
+    display_height = world.globaldata['display_height'];
+    display_width = world.globaldata['display_width'];
+    xs = canvas.width/display_width;
+    ys = canvas.height/display_height;
 
     window.onKeyDown.listen(register_keydown);
     window.onKeyUp.listen(register_keyup);
@@ -46,14 +57,17 @@ class InputSystem extends System {
   // I think/it seems you can add window.scrollX and window.scrollY if you care
   void register_mousedown(MouseEvent e) {
     int x = e.client.x-canvas.offsetLeft; int y = e.client.y-canvas.offsetTop;
+    x = (xs*x).toInt(); y = (ys*y).toInt();
     world.send_event('MouseDown', {'MouseEvent':e,'x':x,'y':y});
   }
   void register_mousemove(MouseEvent e) {
     int x = e.client.x-canvas.offsetLeft; int y = e.client.y-canvas.offsetTop;
+    x = (xs*x).toInt(); y = (ys*y).toInt();
     world.send_event('MouseMove', {'MouseEvent':e,'x':x,'y':y});
   }
   void register_mouseup(MouseEvent e) {
     int x = e.client.x-canvas.offsetLeft; int y = e.client.y-canvas.offsetTop;
+    x = (xs*x).toInt(); y = (ys*y).toInt();
     world.send_event('MouseUp', {'MouseEvent':e,'x':x,'y':y});
   }
   void register_touchstart(TouchEvent e) {
@@ -61,6 +75,7 @@ class InputSystem extends System {
     if (e.touches.length > 0) {
       Touch t = e.touches.first;
       int x = t.client.x-canvas.offsetLeft; int y = t.client.y-canvas.offsetTop;
+      x = (xs*x).toInt(); y = (ys*y).toInt();
       world.send_event('TouchStart', {'TouchEvent':e,'x':x,'y':y});
     }
   }
@@ -69,6 +84,7 @@ class InputSystem extends System {
     if (e.touches.length > 0) {
       Touch t = e.touches.first;
       int x = t.client.x-canvas.offsetLeft; int y = t.client.y-canvas.offsetTop;
+      x = (xs*x).toInt(); y = (ys*y).toInt();
       world.send_event('TouchMove', {'TouchEvent':e,'x':x,'y':y});
     }
   }
