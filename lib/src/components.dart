@@ -111,6 +111,11 @@ class UIProgressBar implements Component {
   UIProgressBar(this.update);
 }
 
+class UIPopup implements Component {
+  // stub
+  UIPopup();
+}
+
 class Animation implements Component {
   AnimationUpdateFunction update;
   AnimationCompleteFunction complete;

@@ -25,6 +25,7 @@ class EntityLoadSystem extends System {
     spawn_map['api'] = spawn_api;
     spawn_map['api slot'] = spawn_api_slot;
     spawn_map['pivot label'] = spawn_pivot_label; // this is kind of dumb
+    spawn_map['recruiter popup'] = spawn_recruiter_popup;
     // or rather, the uilabel stuff should be here too
   }
 
@@ -140,6 +141,26 @@ class EntityLoadSystem extends System {
     e.add_component(new Animation(pivot_animation, null, const Duration(seconds: 2)));
     e.add_to_world();
   }
+
+  void spawn_recruiter_popup() {
+    int popup_width = 200;
+    int popup_height = 200;
+
+    Board board = world.globaldata['board'];
+    int x = rng.nextInt(board.width-popup_width);
+    int y = rng.nextInt(board.height-popup_height);
+
+    Entity e = world.new_entity();
+    e.add_component(new Kind('recruiter popup'));
+    e.add_component(new Position(x,y));
+    e.add_component(new Size(popup_width, popup_height));
+    e.add_component(new UI());
+    e.add_component(new UIPopup());
+    e.add_to_world();
+    // need to add buttons at relevant positions
+    // if this were a real gui system i guess they would be positioned relative to the parent (i.e. the popup) but who cares
+  }
+
 
   void process_entity(Entity entity) {}
   void remove_entity(Entity e) {}
