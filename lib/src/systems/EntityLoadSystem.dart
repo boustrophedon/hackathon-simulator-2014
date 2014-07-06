@@ -3,6 +3,7 @@ part of hacksim;
 class EntityLoadSystem extends System {
   List<List<int>> colorpool;
   List<String> namepool;
+  List<ImageElement> recruiterpool;
   math.Random rng;
 
   int api_size = 40;
@@ -21,6 +22,8 @@ class EntityLoadSystem extends System {
 
     namepool = new List<String>();
 
+    recruiterpool = new List<ImageElement>();
+
     spawn_map = new Map<String, Function>();
     spawn_map['api'] = spawn_api;
     spawn_map['api slot'] = spawn_api_slot;
@@ -32,7 +35,7 @@ class EntityLoadSystem extends System {
   void initialize() {
     init_colorpool(4);
     init_names();
-
+    init_recruiters();
 
     spawn_initial_api_slots();
     spawn_initial_apis();
@@ -54,6 +57,12 @@ class EntityLoadSystem extends System {
     namepool.add("twilio");
     namepool.add("sendgrid");
     namepool.add("mongodB"); // aeden
+  }
+
+  void init_recruiters() {
+    var loader = world.globaldata['image_assets'];
+    recruiterpool.add(loader.images['kaushal']);
+    recruiterpool.add(loader.images['eddiez']);
   }
 
   void handle_spawn(Map event) {
@@ -78,6 +87,10 @@ class EntityLoadSystem extends System {
 
   String name_from_namepool() {
     return namepool[rng.nextInt(namepool.length)];
+  }
+
+  ImageElement recruiter_from_pool() {
+    return recruiterpool[rng.nextInt(recruiterpool.length)];
   }
 
   void spawn_initial_apis() {
@@ -150,12 +163,17 @@ class EntityLoadSystem extends System {
     int x = rng.nextInt(board.width-popup_width);
     int y = rng.nextInt(board.height-popup_height);
 
+    String text = """Dear %%FIRSTNAME%%,
+           We saw your hack at last %%HACKATHON%% hackathon you attended and thought it was great. Our company is looking for ninja hacker pirates like you to lead the future in %%BUZZWORD1%% technology. If you or any developers you know are interested in working on the latest %%BUZZWORD2%% products, we'd love to have you. Send me an email and let me know what you think."""; // intentionally stupid looking. the template things are not meant to be filled in.
+    // look at this example to do text wrapping; http://www.html5canvastutorials.com/tutorials/html5-canvas-wrap-text-tutorial/
+
+
     Entity e = world.new_entity();
     e.add_component(new Kind('recruiter popup'));
     e.add_component(new Position(x,y));
     e.add_component(new Size(popup_width, popup_height));
     e.add_component(new UI());
-    e.add_component(new UIPopup());
+    e.add_component(new UIPopup(recruiter_from_pool(), text));
     e.add_to_world();
     // need to add buttons at relevant positions
     // if this were a real gui system i guess they would be positioned relative to the parent (i.e. the popup) but who cares

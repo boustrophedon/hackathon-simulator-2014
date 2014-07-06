@@ -112,8 +112,9 @@ class UIProgressBar implements Component {
 }
 
 class UIPopup implements Component {
-  // stub
-  UIPopup();
+  ImageElement image;
+  String text;
+  UIPopup(this.image, this.text);
 }
 
 class Animation implements Component {
