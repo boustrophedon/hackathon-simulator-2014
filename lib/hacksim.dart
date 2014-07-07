@@ -30,6 +30,7 @@ part 'src/systems/HackSystem.dart';
 part 'src/systems/CaffeineSystem.dart';
 part 'src/systems/AdSystem.dart';
 part 'src/systems/AnimationSystem.dart';
+part 'src/systems/RecruiterSystem.dart';
 
 part 'src/renderers/Renderer.dart';
 part 'src/renderers/APIRenderer.dart';
@@ -37,6 +38,7 @@ part 'src/renderers/APISlotRenderer.dart';
 part 'src/renderers/RectPickingRenderer.dart';
 part 'src/renderers/BoardRenderer.dart';
 part 'src/renderers/UIButtonRenderer.dart';
+part 'src/renderers/UIPopupRenderer.dart';
 part 'src/renderers/UILabelRenderer.dart';
 part 'src/renderers/UIProgressBarRenderer.dart';
 
@@ -54,6 +56,7 @@ World create_world() {
   world.register_system(new APISlotSystem(world));
   world.register_system(new MoneySystem(world));
   world.register_system(new HackSystem(world));
+  world.register_system(new RecruiterSystem(world));
   world.register_system(new CaffeineSystem(world));
   world.register_system(new AdSystem(world));
   world.register_system(new KeyboardMashSystem(world));
