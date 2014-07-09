@@ -156,17 +156,16 @@ class EntityLoadSystem extends System {
   }
 
   void spawn_recruiter_popup() {
-    int popup_width = 200;
-    int popup_height = 200;
+    int popup_width = 800;
+    int popup_height = 900;
 
     Board board = world.globaldata['board'];
     int x = rng.nextInt(board.width-popup_width);
     int y = rng.nextInt(board.height-popup_height);
 
     String text = """Dear %%FIRSTNAME%%,
-           We saw your hack at last %%HACKATHON%% hackathon you attended and thought it was great. Our company is looking for ninja hacker pirates like you to lead the future in %%BUZZWORD1%% technology. If you or any developers you know are interested in working on the latest %%BUZZWORD2%% products, we'd love to have you. Send me an email and let me know what you think."""; // intentionally stupid looking. the template things are not meant to be filled in.
-    // look at this example to do text wrapping; http://www.html5canvastutorials.com/tutorials/html5-canvas-wrap-text-tutorial/
 
+           We saw your hack at the last %%HACKATHON%% hackathon you attended and thought it was great. Our company is looking for ninja hacker pirates like you to lead the future in %%BUZZWORD1%% technology. If you or any developers you know are interested in working on the latest %%BUZZWORD2%% products, we'd love to have you. Send me an email and let me know what you think."""; // intentionally stupid looking. the template things are not meant to be filled in.
 
     Entity e = world.new_entity();
     e.add_component(new Kind('recruiter popup'));
@@ -175,6 +174,7 @@ class EntityLoadSystem extends System {
     e.add_component(new UI());
     e.add_component(new UIPopup(recruiter_from_pool(), text));
     e.add_to_world();
+
     // need to add buttons at relevant positions
     // if this were a real gui system i guess they would be positioned relative to the parent (i.e. the popup) but who cares
   }

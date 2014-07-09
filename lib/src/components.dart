@@ -114,6 +114,7 @@ class UIProgressBar implements Component {
 class UIPopup implements Component {
   ImageElement image;
   String text;
+  List<String> lines = null;
   UIPopup(this.image, this.text);
 }
 
