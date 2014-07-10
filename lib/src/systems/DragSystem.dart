@@ -76,6 +76,9 @@ class DragSystem extends System {
 
   void handle_deselect(Map event) {
     Entity e = current;
+    if (e == null) {
+      return;
+    }
     if (e.has_component(Draggable)) {
       current = null;
 

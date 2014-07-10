@@ -31,6 +31,7 @@ class PickingSystem extends RenderSystem {
     renderers['ui button'] = new RectPickingRenderer(canvas, context);
     renderers['api slot'] = new RectPickingRenderer(canvas, context);
     renderers['api'] = new RectPickingRenderer(canvas, context);
+    renderers['recruiter popup'] = new RectPickingRenderer(canvas, context);
   }
 
   void handle_click(Map event) {

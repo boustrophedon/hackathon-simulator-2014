@@ -171,6 +171,7 @@ class EntityLoadSystem extends System {
     e.add_component(new Kind('recruiter popup'));
     e.add_component(new Position(x,y));
     e.add_component(new Size(popup_width, popup_height));
+    e.add_component(new Selection());
     e.add_component(new UI());
     e.add_component(new UIPopup(recruiter_from_pool(), text));
     e.add_to_world();
