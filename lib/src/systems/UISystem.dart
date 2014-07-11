@@ -100,7 +100,7 @@ class UISystem extends System {
   void handle_selection(Map event) {
     Entity e = event['entity'];
     Kind kind = e.get_component(Kind);
-    if (kind.kind == 'ui button') {
+    if (kind.kind == 'ui button' || kind.kind == 'popup button') {
       UIButton button = e.get_component(UIButton);
       button.action();
       world.globaldata['selected'] = null;

@@ -155,6 +155,25 @@ class EntityLoadSystem extends System {
     e.add_to_world();
   }
 
+  String get_reply_text() {
+    List<String> texts = ["Nope.", "Haha no.", "I apologize but I cannot.", "I am currently employed.", "Try again later.", "The magic conch told me not to.", "You're tacky and I hate you.", "Another company made a better offer.", "I am not familiar those technologies.", "Your company doesn't have enough traction.", "Hacker News said I shouldn't.", "Russ Frank said I shouldn't.", "Not enough ping pong tables in your offices.", "I am unwilling to relocate.", "I am still in high school.", "I am still in college.", "I am still in elementary school.", "Your office has a dog but I prefer cats.", "Your office has a cat but I prefer dogs.", "The timing of your offer is inopportune.", "I am doing social work in Tanzania starting next week.", "One of your engineers said they enjoyed Javascript."];
+    return texts[rng.nextInt(texts.length)];
+  }
+
+  // this is a really ugly hack. i should do the teardown of b1 and b2 in the ui system
+  // plus I wanted to do the popups overlapping and not going away until you press the right button
+  // but the buttons all render on one layer so they stay on top of the new popups as well
+  void do_popup_push(World world, Entity e, Entity b1, Entity b2, bool correct) {
+    world.remove_entity(e);
+    world.remove_entity(b1);
+    world.remove_entity(b2);
+    if (correct == true) {
+      spawn_recruiter_popup();
+    }
+    else {
+    }
+  }
+
   void spawn_recruiter_popup() {
     int popup_width = 800;
     int popup_height = 900;
@@ -175,6 +194,36 @@ class EntityLoadSystem extends System {
     e.add_component(new UI());
     e.add_component(new UIPopup(recruiter_from_pool(), text));
     e.add_to_world();
+
+    // really I should have a spawn_button in this system rather than the ui but whatever
+    // and all the spawn functions should take a Map passed in via the SpawnEntity event so that you can pass parameters
+    bool correct = rng.nextBool();
+    String reply_text1 = get_reply_text();
+    Entity b1 = world.new_entity();
+    Entity b2 = world.new_entity();
+
+    int button_width = 700;
+    int button_height = 50;
+
+    b1.add_component(new Kind('popup button'));
+    b1.add_component(new Position(x+(popup_width~/2)-(button_width~/2), y+(popup_height*0.75).toInt()));
+    b1.add_component(new Size(button_width, button_height));
+    b1.add_component(new Selection());
+    b1.add_component(new UI());
+    b1.add_component(new UIButton(reply_text1, ()=>(do_popup_push(world, e, b1, b2, correct))));
+    b1.add_to_world();
+
+    String reply_text2 = get_reply_text();
+    while (reply_text1  == reply_text2) {
+      reply_text2 = get_reply_text();
+    }
+    b2.add_component(new Kind('popup button'));
+    b2.add_component(new Position(x+(popup_width~/2)-(button_width~/2), y+70+(popup_height*0.75).toInt()));
+    b2.add_component(new Size(button_width, button_height));
+    b2.add_component(new Selection());
+    b2.add_component(new UI());
+    b2.add_component(new UIButton(reply_text2, ()=>(do_popup_push(world, e, b1, b2, !correct))));
+    b2.add_to_world();
 
     // need to add buttons at relevant positions
     // if this were a real gui system i guess they would be positioned relative to the parent (i.e. the popup) but who cares

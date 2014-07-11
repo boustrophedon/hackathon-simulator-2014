@@ -13,6 +13,7 @@ class UIRenderSystem extends RenderSystem {
     renderers['ui label'] = new UILabelRenderer(canvas, context);
     renderers['ui progressbar'] = new UIProgressBarRenderer(canvas, context);
     renderers['recruiter popup'] = new UIPopupRenderer(canvas, context);
+    renderers['popup button'] = new UIButtonRenderer(canvas, context);
   }
 
   void process() {
