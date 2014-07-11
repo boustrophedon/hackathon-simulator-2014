@@ -63,6 +63,7 @@ class EntityLoadSystem extends System {
     var loader = world.globaldata['image_assets'];
     recruiterpool.add(loader.images['kaushal']);
     recruiterpool.add(loader.images['eddiez']);
+    recruiterpool.add(loader.images['swift']);
   }
 
   void handle_spawn(Map event) {

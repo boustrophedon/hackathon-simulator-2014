@@ -59,12 +59,14 @@ class UIPopupRenderer extends Renderer {
     context.fill();
     context.stroke();
 
+    context.drawImage(pop.image, pos.x+50, pos.y+50);
+
     int lnum = 0;
     for (String line in pop.lines) {
         context.fillStyle = 'rgba(${ui.font_color_string})';
         context.font = "${ui.font_size}pt ${ui.type_face}";
         int xoffset = (context.measureText("${line}").width)~/2;
-        int yoffset = (50 + lnum*1.5*(ui.font_size)).toInt();
+        int yoffset = (300 + lnum*1.5*(ui.font_size)).toInt();
         context.fillText(line, pos.x+(size.width~/2)-xoffset, pos.y+yoffset+(ui.font_size~/4));
 
         lnum++;

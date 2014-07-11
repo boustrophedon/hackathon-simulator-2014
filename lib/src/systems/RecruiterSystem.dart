@@ -12,7 +12,8 @@ class RecruiterSystem extends System {
   }
 
   void handle_newhackathon(Map event) {
-    if (world.globaldata['HackathonsAttended'] > 2 && rng.nextDouble() >0.5)  {
+    int level = world.globaldata['HackathonsAttended'];
+    if (rng.nextInt(level*level) > level)  {
       world.send_event("SpawnEntity", {'type':'recruiter popup'});
     }
   }
